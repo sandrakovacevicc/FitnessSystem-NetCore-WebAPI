@@ -1,0 +1,17 @@
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Infrastructure.deps.json
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Infrastructure.runtimeconfig.json
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Infrastructure.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Infrastructure.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Core.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\bin\Debug\net8.0\FitnessSystem.Core.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.AssemblyInfo.cs
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessS.CCF6786F.Up2Date
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\refint\FitnessSystem.Infrastructure.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.genruntimeconfig.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\ref\FitnessSystem.Infrastructure.dll

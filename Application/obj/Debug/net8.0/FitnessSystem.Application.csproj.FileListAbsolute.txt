@@ -1,0 +1,15 @@
+C:\Users\korisnik\source\repos\FitnessSystem\Application\bin\Debug\net8.0\FitnessSystem.Application.deps.json
+C:\Users\korisnik\source\repos\FitnessSystem\Application\bin\Debug\net8.0\FitnessSystem.Application.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Application\bin\Debug\net8.0\FitnessSystem.Application.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Application\bin\Debug\net8.0\FitnessSystem.Core.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Application\bin\Debug\net8.0\FitnessSystem.Core.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.csproj.AssemblyReference.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.AssemblyInfoInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.AssemblyInfo.cs
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessS.3621B712.Up2Date
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\refint\FitnessSystem.Application.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\ref\FitnessSystem.Application.dll

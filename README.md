@@ -1,1 +1,2 @@
 # diplomski
+pocetak

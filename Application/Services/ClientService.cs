@@ -45,6 +45,30 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<ClientAddDto>(client);
         }
 
+        public async Task<ClientDeleteDto> DeleteClientAsync(int id)
+        {
+            var client = await _clientRepository.GetByIdAsync(id);
+            if (client == null)
+            {
+                return null;
+            }
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                var deletedClient = await _clientRepository.DeleteAsync(id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                return _mapper.Map<ClientDeleteDto>(deletedClient);
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
+
         public async Task<List<ClientDto>> GetAllAsync()
         {
             var clients = _clientRepository.GetAll("MembershipPackage").ToList();

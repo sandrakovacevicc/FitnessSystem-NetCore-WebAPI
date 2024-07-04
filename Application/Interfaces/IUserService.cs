@@ -13,5 +13,8 @@ namespace FitnessSystem.Application.Interfaces
         Task<List<UserDto>> GetAllAsync();
         Task<UserDto> GetByIdAsync(int id);
         Task<UserDto> CreateUserAsync(UserDto userDto);
+        Task<UserDeleteDto> DeleteUserAsync(int id);
+
+
     }
 }

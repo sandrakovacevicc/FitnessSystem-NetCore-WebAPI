@@ -17,19 +17,28 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        //public async Task<List<Reservation>> GetAllAsync()
-        //{
-        //    return await _dbContext.Reservations
-        //        //.Include(r => r.Client)
-        //        .Include(r => r.Session)
-        //        .Include(r => r.Session.Room)
-        //        .Include(r => r.Session.TrainingProgram)
-        //        .Include(r => r.Session.Trainer)
-        //        .ToListAsync();
+        public async Task<Reservation> CreateAsync(Reservation reservation)
+        {
+            await _dbContext.Reservations.AddAsync(reservation);
+            await _dbContext.SaveChangesAsync();
+            return reservation;
+        }
 
-        //}
+        public async Task<Reservation> DeleteAsync(int id)
+        {
+            var reservation = await _dbContext.Reservations.FindAsync(id);
+            if (reservation == null)
+            {
+                return null;
+            }
 
-        public async Task<Reservation> GetByIdAsync(int id)
+            _dbContext.Reservations.Remove(reservation);
+            await _dbContext.SaveChangesAsync();
+
+            return reservation;
+        }
+
+        public async Task<Reservation?> GetByIdAsync(int id)
         {
             return await _dbContext.Reservations
                 .Include(r => r.Client)

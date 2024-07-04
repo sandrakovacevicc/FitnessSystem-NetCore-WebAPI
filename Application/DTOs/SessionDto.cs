@@ -16,6 +16,6 @@ namespace FitnessSystem.Application.DTOs
         public TrainingProgramDto TrainingProgram { get; set; }
         public TrainerDto Trainer { get; set; }
         public RoomDto Room { get; set; }
-        public List<ClientDto> Clients { get; set; }
+        
     }
 }

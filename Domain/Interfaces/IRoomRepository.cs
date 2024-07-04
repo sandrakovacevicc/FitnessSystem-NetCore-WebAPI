@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface IRoomRepository : IRepository<Room>
     {
-        //Task<List<Room>> GetAllAsync();
         Task<Room> GetByIdAsync(int id);
         Task<Room> CreateAsync(Room room);
+        Task<Room> DeleteAsync(int id);
     }
 }

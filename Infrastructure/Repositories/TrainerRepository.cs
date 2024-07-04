@@ -26,11 +26,19 @@ namespace FitnessSystem.Infrastructure.Repositories
             return trainer;
         }
 
-        //public async Task<List<Trainer>> GetAllAsync()
-        //{
-        //    return await _dbContext.Trainers.ToListAsync();
+        public async Task<Trainer> DeleteAsync(int id)
+        {
+            var trainer = await _dbContext.Trainers.FindAsync(id);
+            if (trainer == null)
+            {
+                return null;
+            }
 
-        //}
+            _dbContext.Trainers.Remove(trainer);
+            await _dbContext.SaveChangesAsync();
+
+            return trainer;
+        }
 
         public async Task<Trainer?> GetByIdAsync(int id)
         {

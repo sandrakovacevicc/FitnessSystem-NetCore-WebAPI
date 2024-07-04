@@ -24,10 +24,19 @@ namespace FitnessSystem.Infrastructure.Repositories
             return trainingProgram;
         }
 
-        //public async Task<List<TrainingProgram>> GetAllAsync()
-        //{
-        //    return await _dbContext.TrainingPrograms.Include(t => t.Sessions).ToListAsync();
-        //}
+        public async Task<TrainingProgram> DeleteAsync(int id)
+        {
+            var program = await _dbContext.TrainingPrograms.FindAsync(id);
+            if (program == null)
+            {
+                return null;
+            }
+
+            _dbContext.TrainingPrograms.Remove(program);
+            await _dbContext.SaveChangesAsync();
+
+            return program;
+        }
 
         public async Task<TrainingProgram?> GetByIdAsync(int id)
         {

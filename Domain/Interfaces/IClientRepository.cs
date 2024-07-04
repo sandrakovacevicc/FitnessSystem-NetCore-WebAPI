@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface IClientRepository : IRepository<Client>
     {
-        //Task<List<Client>> GetAllAsync();
         Task<Client> GetByIdAsync(int id);
         Task<Client> CreateAsync(Client client);
+        Task<Client> DeleteAsync(int id);
     }
 }

@@ -45,6 +45,30 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<TrainingProgramDto>(trainingProgram);
         }
 
+        public async Task<TrainingProgramDeleteDto> DeleteTrainingProgramAsync(int id)
+        {
+            var program = await _programRepository.GetByIdAsync(id);
+            if (program == null)
+            {
+                return null;
+            }
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                var deletedProgram = await _programRepository.DeleteAsync(id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                return _mapper.Map<TrainingProgramDeleteDto>(deletedProgram);
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
+
         public async Task<List<TrainingProgramDto>> GetAllAsync()
         {
             var programs =  _programRepository.GetAll().ToList();

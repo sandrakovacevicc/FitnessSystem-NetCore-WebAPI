@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface IMembershipPackageRepository : IRepository<MembershipPackage>
     {
-        //Task<List<MembershipPackage>> GetAllAsync();
         Task<MembershipPackage> GetByIdAsync(int id);
         Task<MembershipPackage> CreateAsync(MembershipPackage package);
+        Task<MembershipPackage> DeleteAsync(int id);
     }
 }

@@ -54,5 +54,17 @@ namespace FitnessSystem.Presentation.Controllers
                 return StatusCode(500, "An error occurred while creating the admin.");
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMembershipPackage(int id)
+        {
+            var membershipPackageToDelete = await _membershipPackageService.DeleteMembershipPackageAsync(id);
+            if (membershipPackageToDelete == null)
+            {
+                return NotFound(new { message = "MembershipPackage not found." });
+            }
+
+            return Ok(new { message = "MembershipPackage deleted successfully.", membershipPackage = membershipPackageToDelete });
+        }
     }
 }

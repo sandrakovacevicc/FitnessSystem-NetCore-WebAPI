@@ -11,5 +11,7 @@ namespace FitnessSystem.Application.Interfaces
     {
         Task<List<ReservationDto>> GetAllAsync();
         Task<ReservationDto> GetByIdAsync(int id);
+        Task<ReservationAddDto> CreateReservationAsync(ReservationAddDto reservationAddDto);
+        Task<ReservationDeleteDto> DeleteReservationAsync(int id);
     }
 }

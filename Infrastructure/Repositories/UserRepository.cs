@@ -24,10 +24,19 @@ namespace FitnessSystem.Infrastructure.Repositories
             return user;
         }
 
-        //public async Task<List<User>> GetAllAsync()
-        //{
-        //    return await _dbContext.Users.ToListAsync();
-        //}
+        public async Task<User> DeleteAsync(int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            _dbContext.Users.Remove(user);
+            await _dbContext.SaveChangesAsync();
+
+            return user;
+        }
 
         public async Task<User?> GetByIdAsync(int id)
         {

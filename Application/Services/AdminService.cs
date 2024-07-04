@@ -45,6 +45,30 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<AdminDto>(admin);
         }
 
+        public async Task<AdminDeleteDto> DeleteAdminAsync(int id)
+        {
+            var admin = await _adminRepository.GetByIdAsync(id);
+            if (admin == null)
+            {
+                return null;
+            }
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                var deletedAdmin = await _adminRepository.DeleteAsync(id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                return _mapper.Map<AdminDeleteDto>(deletedAdmin);
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
+
         public async Task<List<AdminDto>> GetAllAsync()
         {
             var admins =  _adminRepository.GetAll().ToList();

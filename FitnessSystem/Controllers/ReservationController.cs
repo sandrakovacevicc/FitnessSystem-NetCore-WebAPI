@@ -34,5 +34,37 @@ namespace FitnessSystem.Presentation.Controllers
             }
             return Ok(reservationDto);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateReservation([FromBody] ReservationAddDto reservationAddDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var createdReservation = await _reservationService.CreateReservationAsync(reservationAddDto);
+                return Ok(createdReservation);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while creating the admin.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReservation(int id)
+        {
+            var reservationToDelete = await _reservationService.DeleteReservationAsync(id);
+            if (reservationToDelete == null)
+            {
+                return NotFound(new { message = "Reservation not found." });
+            }
+
+            return Ok(new { message = "Reservation deleted successfully.", reservation = reservationToDelete });
+        }
     }
 }

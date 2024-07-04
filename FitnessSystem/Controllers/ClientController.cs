@@ -53,5 +53,17 @@ namespace FitnessSystem.Presentation.Controllers
                 return StatusCode(500, "An error occurred while creating the client.");
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            var clientToDelete = await _clientService.DeleteClientAsync(id);
+            if (clientToDelete == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            return Ok(new { message = "User deleted successfully.", client = clientToDelete });
+        }
     }
 }

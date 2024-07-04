@@ -1,5 +1,6 @@
 ﻿using FitnessSystem.Application.DTOs;
 using FitnessSystem.Application.Interfaces;
+using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,38 @@ namespace FitnessSystem.Presentation.Controllers
                 return NotFound();
             }
             return Ok(sessionDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSession([FromBody] SessionAddDto sessionAddDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var createdSession = await _sessionService.CreateSessionAsync(sessionAddDto);
+                return Ok(createdSession);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while creating the admin.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSession(int id)
+        {
+            var sessionToDelete = await _sessionService.DeleteSessionAsync(id);
+            if (sessionToDelete == null)
+            {
+                return NotFound(new { message = "Session not found." });
+            }
+
+            return Ok(new { message = "Session deleted successfully.", reservation = sessionToDelete });
         }
     }
 }

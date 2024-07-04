@@ -12,5 +12,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<List<TrainingProgramDto>> GetAllAsync();
         Task<TrainingProgramDto> GetByIdAsync(int id);
         Task<TrainingProgramDto> CreateTrainingProgramAsync(TrainingProgramDto trainingProgramDto);
+        Task<TrainingProgramDeleteDto> DeleteTrainingProgramAsync(int id);
     }
 }

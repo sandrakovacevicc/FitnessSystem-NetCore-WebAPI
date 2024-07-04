@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface IAdminRepository :  IRepository<Admin>
     {
-        //Task<List<Admin>> GetAllAsync();
         Task<Admin> GetByIdAsync(int id);
         Task<Admin> CreateAsync(Admin admin);
+        Task<Admin> DeleteAsync(int id);
     }
 }

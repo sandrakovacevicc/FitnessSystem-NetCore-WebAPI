@@ -24,12 +24,19 @@ namespace Infrastructure.Repositories
             return admin;
         }
 
+        public async Task<Admin> DeleteAsync(int id)
+        {
+            var admin = await _dbContext.Admins.FindAsync(id);
+            if (admin == null)
+            {
+                return null;
+            }
 
-        //public async Task<List<Admin>> GetAllAsync()
-        //{
-        //    return await _dbContext.Admins.ToListAsync();
+            _dbContext.Admins.Remove(admin);
+            await _dbContext.SaveChangesAsync();
 
-        //}
+            return admin;
+        }
 
         public async Task<Admin?> GetByIdAsync(int id)
         {

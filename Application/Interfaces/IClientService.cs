@@ -12,5 +12,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<List<ClientDto>> GetAllAsync();
         Task<ClientDto> GetByIdAsync(int id);
         Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto);
+        Task<ClientDeleteDto> DeleteClientAsync(int id);
     }
 }

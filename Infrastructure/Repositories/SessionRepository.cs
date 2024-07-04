@@ -17,14 +17,26 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        //public async Task<List<Session>> GetAllAsync()
-        //{
-        //    return await _dbContext.Sessions
-        //        .Include(s => s.Clients).ThenInclude(s => s.MembershipPackage).
-        //        Include(s => s.Room).
-        //        Include(s => s.TrainingProgram).ToListAsync();
+        public async Task<Session> CreateAsync(Session session)
+        {
+            await _dbContext.Sessions.AddAsync(session);
+            await _dbContext.SaveChangesAsync();
+            return session;
+        }
 
-        //}
+        public async Task<Session> DeleteAsync(int id)
+        {
+            var session = await _dbContext.Sessions.FindAsync(id);
+            if (session == null)
+            {
+                return null;
+            }
+
+            _dbContext.Sessions.Remove(session);
+            await _dbContext.SaveChangesAsync();
+
+            return session;
+        }
 
         public async Task<Session?> GetByIdAsync(int id)
         {

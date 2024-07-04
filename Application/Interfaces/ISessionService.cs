@@ -12,5 +12,7 @@ namespace FitnessSystem.Application.Interfaces
     {
         Task<List<SessionDto>> GetAllAsync();
         Task<SessionDto> GetByIdAsync(int id);
+        Task<SessionAddDto> CreateSessionAsync(SessionAddDto sessionAddDto);
+        Task<SessionDeleteDto> DeleteSessionAsync(int id);
     }
 }

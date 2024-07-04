@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using FitnessSystem.Core.Interfaces.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IRoomRepository
+    public interface IRoomRepository : IRepository<Room>
     {
-        Task<List<Room>> GetAllAsync();
+        //Task<List<Room>> GetAllAsync();
+        Task<Room> GetByIdAsync(int id);
+        Task<Room> CreateAsync(Room room);
     }
 }

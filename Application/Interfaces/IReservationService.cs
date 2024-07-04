@@ -10,5 +10,6 @@ namespace FitnessSystem.Application.Interfaces
     public interface IReservationService
     {
         Task<List<ReservationDto>> GetAllAsync();
+        Task<ReservationDto> GetByIdAsync(int id);
     }
 }

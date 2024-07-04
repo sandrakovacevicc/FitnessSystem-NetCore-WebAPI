@@ -10,5 +10,7 @@ namespace FitnessSystem.Application.Interfaces
     public interface IRoomService
     {
         Task<List<RoomDto>> GetAllAsync();
+        Task<RoomDto> GetByIdAsync(int id);
+        Task<RoomDto> CreateRoomAsync(RoomDto roomDto);
     }
 }

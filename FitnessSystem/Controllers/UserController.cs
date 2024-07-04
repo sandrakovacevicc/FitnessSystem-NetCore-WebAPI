@@ -23,5 +23,37 @@ namespace FitnessSystem.Presentation.Controllers
             var users = await _userService.GetAllAsync();
             return Ok(users);
         }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var userDto = await _userService.GetByIdAsync(id);
+            if (userDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(userDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var createdUser = await _userService.CreateUserAsync(userDto);
+                return Ok(createdUser);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while creating the admin.");
+            }
+        }
     }
 }

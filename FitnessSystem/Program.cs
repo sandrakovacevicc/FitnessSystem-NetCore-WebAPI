@@ -1,9 +1,13 @@
 using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.Mappings;
 using FitnessSystem.Application.Services;
+using FitnessSystem.Core.Interfaces;
+using FitnessSystem.Core.Interfaces.Base;
 using FitnessSystem.Data;
+using FitnessSystem.Infrastructure.Data;
 using FitnessSystem.Infrastructure.Repositories;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +51,7 @@ builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 

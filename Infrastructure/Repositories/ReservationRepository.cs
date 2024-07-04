@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Data;
+using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,35 @@ using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
 {
-    public class ReservationRepository : IReservationRepository
+    public class ReservationRepository : Repository<Reservation>, IReservationRepository
     {
-        private readonly AppDbContext _appDbContext;
-
-        public ReservationRepository(AppDbContext appDbContext)
+        public ReservationRepository(AppDbContext dbContext) : base(dbContext)
         {
-            _appDbContext = appDbContext;
         }
-        public async Task<List<Reservation>> GetAllAsync()
-        {
-            return await _appDbContext.Reservations.ToListAsync();
 
+        //public async Task<List<Reservation>> GetAllAsync()
+        //{
+        //    return await _dbContext.Reservations
+        //        //.Include(r => r.Client)
+        //        .Include(r => r.Session)
+        //        .Include(r => r.Session.Room)
+        //        .Include(r => r.Session.TrainingProgram)
+        //        .Include(r => r.Session.Trainer)
+        //        .ToListAsync();
+
+        //}
+
+        public async Task<Reservation> GetByIdAsync(int id)
+        {
+            return await _dbContext.Reservations
+                .Include(r => r.Client)
+                .ThenInclude(c => c.MembershipPackage)
+                .Include(r => r.Session)
+                    .ThenInclude(s => s.TrainingProgram)
+                 .Include(r => r.Session)
+                    .ThenInclude(s => s.Room)
+                .FirstOrDefaultAsync(r => r.ReservationId == id);
         }
+
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.DTOs;
 using FitnessSystem.Application.Interfaces;
+using FitnessSystem.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +16,48 @@ namespace FitnessSystem.Application.Services
     {
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ClientService(IClientRepository clientRepository, IMapper mapper)
+        public ClientService(IClientRepository clientRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
+        }
 
+        public async Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto)
+        {
+            var client = _mapper.Map<Client>(clientAddDto);
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _clientRepository.CreateAsync(client);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+
+            return _mapper.Map<ClientAddDto>(client);
         }
 
         public async Task<List<ClientDto>> GetAllAsync()
         {
-            var clients = await _clientRepository.GetAllAsync();
+            var clients = _clientRepository.GetAll("MembershipPackage").ToList();
 
             var clientsDto = _mapper.Map<List<ClientDto>>(clients);
 
             return clientsDto;
+        }
+         
+        public async Task<ClientDto> GetByIdAsync(int id)
+        {
+            var client = await _clientRepository.GetByIdAsync(id);
+            return _mapper.Map<ClientDto>(client);
         }
     }
 }

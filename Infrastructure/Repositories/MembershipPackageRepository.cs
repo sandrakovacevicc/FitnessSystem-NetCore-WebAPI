@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Data;
+using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,28 @@ using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
 {
-    public class MembershipPackageRepository : IMembershipPackageRepository
+    public class MembershipPackageRepository : Repository<MembershipPackage>, IMembershipPackageRepository
     {
-        private readonly AppDbContext _appDbContext;
-
-        public MembershipPackageRepository(AppDbContext appDbContext)
+        public MembershipPackageRepository(AppDbContext dbContext) : base(dbContext)
         {
-            _appDbContext = appDbContext;
         }
-        public async Task<List<MembershipPackage>> GetAllAsync()
+
+        public async Task<MembershipPackage> CreateAsync(MembershipPackage package)
         {
-            return await _appDbContext.MembershipPackages.ToListAsync();
-            
+            await _dbContext.MembershipPackages.AddAsync(package);
+            await _dbContext.SaveChangesAsync();
+            return package;
+        }
+
+        //public async Task<List<MembershipPackage>> GetAllAsync()
+        //{
+        //    return await _dbContext.MembershipPackages.ToListAsync();
+
+        //}
+
+        public async Task<MembershipPackage?> GetByIdAsync(int id)
+        {
+            return await _dbContext.MembershipPackages.FirstOrDefaultAsync(m => m.MembershipPackageId == id);
         }
     }
 }

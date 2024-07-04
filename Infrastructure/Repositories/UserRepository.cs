@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Data;
+using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,27 @@ using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : Repository<User>,IUserRepository
     {
-        private readonly AppDbContext _appDbContext;
-
-        public UserRepository(AppDbContext appDbContext)
+        public UserRepository(AppDbContext dbContext) : base(dbContext)
         {
-            _appDbContext = appDbContext;
         }
-        public async Task<List<User>> GetAllAsync()
+
+        public async Task<User> CreateAsync(User user)
         {
-            return await _appDbContext.Users.ToListAsync();
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+            return user;
+        }
+
+        //public async Task<List<User>> GetAllAsync()
+        //{
+        //    return await _dbContext.Users.ToListAsync();
+        //}
+
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
     }
 }

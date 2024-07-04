@@ -10,5 +10,7 @@ namespace FitnessSystem.Application.Interfaces
     public interface IMembershipPackageService
     {
         Task<List<MembershipPackageDto>> GetAllAsync();
+        Task<MembershipPackageDto> GetByIdAsync(int id);
+        Task<MembershipPackageDto> CreateMembershipPackageAsync(MembershipPackageDto membershipPackageDto);
     }
 }

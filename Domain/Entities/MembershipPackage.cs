@@ -14,6 +14,7 @@ namespace Core.Entities
         public string Description { get; set; }
         public double Price { get; set; }
         public int NumberOfMonths { get; set; }
+        [JsonIgnore]
         public List<Client> Clients { get; set; }
 
     }

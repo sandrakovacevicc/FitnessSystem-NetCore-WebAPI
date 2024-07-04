@@ -1,5 +1,6 @@
 ﻿using FitnessSystem.Application.DTOs;
 using FitnessSystem.Application.Interfaces;
+using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,37 @@ namespace FitnessSystem.Presentation.Controllers
         {
             var admins = await _adminService.GetAllAsync();
             return Ok(admins);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var adminDto = await _adminService.GetByIdAsync(id);
+            if (adminDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(adminDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAdmin([FromBody] AdminDto adminDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var createdAdmin = await _adminService.CreateAdminAsync(adminDto);
+                return Ok(createdAdmin);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, "An error occurred while creating the admin.");
+            }
         }
     }
 }

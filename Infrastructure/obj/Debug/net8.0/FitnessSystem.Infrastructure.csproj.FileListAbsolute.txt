@@ -15,3 +15,4 @@ C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\ref
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.genruntimeconfig.cache
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\ref\FitnessSystem.Infrastructure.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.sourcelink.json

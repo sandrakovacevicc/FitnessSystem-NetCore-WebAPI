@@ -210,8 +210,15 @@ namespace FitnessSystem.Presentation.Migrations
                 {
                     b.HasBaseType("Core.Entities.User");
 
+                    b.Property<DateTime>("Birthdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MembershipPackageId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("MembershipPackageId");
 

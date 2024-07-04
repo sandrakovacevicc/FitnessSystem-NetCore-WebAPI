@@ -9,8 +9,11 @@ namespace FitnessSystem.Application.DTOs
 {
     public class ClientDto : UserDto
     {
-        
-        public MembershipPackage MembershipPackage { get; set; }
-        public List<ReservationDto> Reservations { get; set; }
+
+        public MembershipPackageDto MembershipPackage { get; set; }
+        public DateTime Birthdate { get; set; }
+        public string MobileNumber { get; set; }
+
     }
+        
 }

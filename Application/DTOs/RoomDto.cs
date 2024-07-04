@@ -10,7 +10,7 @@ namespace FitnessSystem.Application.DTOs
     public class RoomDto
     {
         public string RoomName { get; set; }
-        public Session Session { get; set; }
+        //public Session Session { get; set; }
 
     }
 }

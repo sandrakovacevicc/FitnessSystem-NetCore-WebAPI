@@ -13,3 +13,4 @@ C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\Fitnes
 C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\refint\FitnessSystem.Application.dll
 C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\ref\FitnessSystem.Application.dll
+C:\Users\korisnik\source\repos\FitnessSystem\Application\obj\Debug\net8.0\FitnessSystem.Application.sourcelink.json

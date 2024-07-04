@@ -12,7 +12,7 @@ namespace FitnessSystem.Application.DTOs
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public string Status { get; set; }
-        public Client Client { get; set; }
-        public Session Session { get; set; }
+        public ClientDto Client { get; set; }
+        public SessionDto Session { get; set; }
     }
 }

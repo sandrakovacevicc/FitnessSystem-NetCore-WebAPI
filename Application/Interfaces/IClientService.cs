@@ -10,5 +10,7 @@ namespace FitnessSystem.Application.Interfaces
     public interface IClientService
     {
         Task<List<ClientDto>> GetAllAsync();
+        Task<ClientDto> GetByIdAsync(int id);
+        Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto);
     }
 }

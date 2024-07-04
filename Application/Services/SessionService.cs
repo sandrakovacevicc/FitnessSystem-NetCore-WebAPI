@@ -24,12 +24,18 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<SessionDto>> GetAllAsync()
         {
-            var sessions = await _sessionRepository.GetAllAsync();
+            var sessions =  _sessionRepository.GetAll("Trainer,Room,TrainingProgram").ToList();
 
             var sessionsDto = _mapper.Map<List<SessionDto>>(sessions);
 
             return sessionsDto;
 
+        }
+
+        public async Task<SessionDto> GetByIdAsync(int id)
+        {
+            var session = await _sessionRepository.GetByIdAsync(id);
+            return _mapper.Map<SessionDto>(session);
         }
     }
 }

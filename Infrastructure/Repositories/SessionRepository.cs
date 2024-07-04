@@ -40,7 +40,7 @@ namespace FitnessSystem.Infrastructure.Repositories
 
         public async Task<Session?> GetByIdAsync(int id)
         {
-            return await _dbContext.Sessions.FirstOrDefaultAsync(s => s.SessionId == id);
+            return await _dbContext.Sessions.Include(s => s.Trainer).Include(s => s.TrainingProgram).Include(s => s.Room).FirstOrDefaultAsync(s => s.SessionId == id);
         }
     }
 }

@@ -83,5 +83,43 @@ namespace FitnessSystem.Application.Services
             var membershipPackage = await _membershipPackageRepository.GetByIdAsync(id);
             return _mapper.Map<MembershipPackageDto>(membershipPackage);
         }
+
+        public async Task<MembershipPackageDeleteDto> UpdateMembershipPackageAsync(int id, MembershipPackageDto membershipPackageDto)
+        {
+            var membershipPackage = await _membershipPackageRepository.GetByIdAsync(id);
+            if (membershipPackage == null)
+            {
+                throw new KeyNotFoundException("MembershipPackage not found.");
+            }
+
+            membershipPackage.Description = membershipPackageDto.Description;
+            membershipPackage.NumberOfMonths = membershipPackageDto.NumberOfMonths;
+            membershipPackage.Price = membershipPackageDto.Price;
+            membershipPackage.Name = membershipPackageDto.Name;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _membershipPackageRepository.UpdateAsync(membershipPackage, id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                var membershipPackageUpdateDto = new MembershipPackageDeleteDto
+                {
+                    MembershipPackageId = membershipPackage.MembershipPackageId,
+                    Name = membershipPackage.Name,
+                    Description = membershipPackage.Description,
+                    NumberOfMonths = membershipPackage.NumberOfMonths,
+                    Price = membershipPackage.Price
+                };
+
+                return membershipPackageUpdateDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

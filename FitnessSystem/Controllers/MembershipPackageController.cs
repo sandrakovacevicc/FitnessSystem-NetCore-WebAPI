@@ -66,5 +66,29 @@ namespace FitnessSystem.Presentation.Controllers
 
             return Ok(new { message = "MembershipPackage deleted successfully.", membershipPackage = membershipPackageToDelete });
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<MembershipPackageDeleteDto>> UpdateClient(int id, [FromBody] MembershipPackageDto membershipPackageDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updatedMembershipPackage = await _membershipPackageService.UpdateMembershipPackageAsync(id, membershipPackageDto);
+                return Ok(updatedMembershipPackage);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
     }
 }

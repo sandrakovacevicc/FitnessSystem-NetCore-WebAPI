@@ -68,5 +68,29 @@ namespace FitnessSystem.Presentation.Controllers
 
             return Ok(new { message = "TrainingProgram deleted successfully.", room = trainingProgramToDelete });
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<TrainingProgramDeleteDto>> UpdateClient(int id, [FromBody] TrainingProgramDto trainingProgramDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updatedRoom = await _trainingProgramService.UpdateTrainingProgramAsync(id, trainingProgramDto);
+                return Ok(updatedRoom);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
     }
 }

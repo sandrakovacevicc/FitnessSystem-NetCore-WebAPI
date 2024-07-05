@@ -84,5 +84,37 @@ namespace FitnessSystem.Application.Services
             var room = await _roomRepository.GetByIdAsync(id);
             return _mapper.Map<RoomDto>(room);
         }
+
+        public async Task<RoomDeleteDto> UpdateRoomAsync(int id, RoomDto roomDto)
+        {
+            var room = await _roomRepository.GetByIdAsync(id);
+            if (room == null)
+            {
+                throw new KeyNotFoundException("Room not found.");
+            }
+
+            room.RoomName = roomDto.RoomName;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _roomRepository.UpdateAsync(room, id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                var roomUpdateDto = new RoomDeleteDto
+                {
+                   RoomId = room.RoomId,
+                   RoomName = room.RoomName
+                };
+
+                return roomUpdateDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

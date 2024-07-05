@@ -46,6 +46,7 @@ namespace FitnessSystem.Application.Mappings
             CreateMap<Room, RoomDeleteDto>();
             CreateMap<Reservation, ReservationDeleteDto>();
             CreateMap<TrainingProgram, TrainingProgramDeleteDto>();
+         
 
         }
     }

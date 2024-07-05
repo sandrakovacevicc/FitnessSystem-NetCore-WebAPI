@@ -83,5 +83,46 @@ namespace FitnessSystem.Application.Services
             var admin = await _adminRepository.GetByIdAsync(jmbg);
             return _mapper.Map<AdminDto>(admin);
         }
+
+        public async Task<AdminDto> UpdateAdminAsync(string jmbg, AdminUpdateDto adminUpdateDto)
+        {
+            var admin = await _adminRepository.GetByIdAsync(jmbg);
+            if (admin == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            admin.Name = adminUpdateDto.Name;
+            admin.Surname = adminUpdateDto.Surname;
+            admin.Email = adminUpdateDto.Email;
+            admin.Password = adminUpdateDto.Password;
+
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _adminRepository.UpdateAsync(admin, jmbg);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+
+                var adminDto = new AdminDto
+                {
+                    JMBG = admin.JMBG,
+                    Name = admin.Name,
+                    Surname = admin.Surname,
+                    Email = admin.Email,
+                    Password = admin.Password
+
+                };
+
+                return adminDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

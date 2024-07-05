@@ -85,5 +85,47 @@ namespace FitnessSystem.Application.Services
             var user = await _userRepository.GetByIdAsync(JMBG);
             return _mapper.Map<UserDto>(user);
         }
+
+        public async Task<UserDto> UpdateUserAsync(string jmbg, UserUpdateDto userUpdateDto)
+        {
+            var user = await _userRepository.GetByIdAsync(jmbg);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            user.Name = userUpdateDto.Name;
+            user.Surname = userUpdateDto.Surname;
+            user.Email = userUpdateDto.Email;
+            user.Password = userUpdateDto.Password;
+ 
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _userRepository.UpdateAsync(user, jmbg);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+               
+                var userDto = new UserDto
+                {
+                    JMBG = user.JMBG, 
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Password = user.Password
+                   
+                };
+
+                return userDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
+
     }
 }

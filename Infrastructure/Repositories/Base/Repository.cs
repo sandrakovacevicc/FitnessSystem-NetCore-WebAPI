@@ -29,6 +29,23 @@ namespace FitnessSystem.Infrastructure.Repositories.Base
             return query;
         }
 
-       
+        public async Task UpdateAsync(TEntity entityToUpdate, object key)
+        {
+            if (entityToUpdate == null)
+                throw new ArgumentNullException(nameof(entityToUpdate));
+
+            var existingEntity = await _dbContext.Set<TEntity>().FindAsync(key);
+            if (existingEntity != null)
+            {
+                _dbContext.Entry(existingEntity).CurrentValues.SetValues(entityToUpdate);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Entity not found");
+            }
+        }
+
+
     }
 }

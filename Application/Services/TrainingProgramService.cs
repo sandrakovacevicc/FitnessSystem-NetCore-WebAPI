@@ -83,5 +83,43 @@ namespace FitnessSystem.Application.Services
             var program = await _programRepository.GetByIdAsync(id);
             return _mapper.Map<TrainingProgramDto>(program);
         }
+
+        public async Task<TrainingProgramDeleteDto> UpdateTrainingProgramAsync(int id, TrainingProgramDto trainingProgramDto)
+        {
+            var program = await _programRepository.GetByIdAsync(id);
+            if (program == null)
+            {
+                throw new KeyNotFoundException("TrainingProgram not found.");
+            }
+
+            program.Description = trainingProgramDto.Description;
+            program.TrainingDurationInMinutes = trainingProgramDto.TrainingDurationInMinutes;
+            program.TrainingType = trainingProgramDto.TrainingType;
+            program.Name = trainingProgramDto.Name;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _programRepository.UpdateAsync(program, id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                var programDto = new TrainingProgramDeleteDto
+                {
+                    TrainingProgramId = program.TrainingProgramId,
+                    Name = program.Name,
+                    Description = program.Description,
+                    TrainingDurationInMinutes = program.TrainingDurationInMinutes,
+                    TrainingType = program.TrainingType
+                };
+
+                return programDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

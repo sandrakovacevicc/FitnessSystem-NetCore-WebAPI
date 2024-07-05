@@ -13,5 +13,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<ClientDto> GetByIdAsync(string JMBG);
         Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto);
         Task<ClientDeleteDto> DeleteClientAsync(string JMBG);
+        Task<ClientAddDto> UpdateClientAsync(string jmbg, ClientUpdateDto clientUpdateDto);
     }
 }

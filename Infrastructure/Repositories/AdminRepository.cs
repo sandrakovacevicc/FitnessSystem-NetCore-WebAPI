@@ -24,9 +24,9 @@ namespace Infrastructure.Repositories
             return admin;
         }
 
-        public async Task<Admin> DeleteAsync(int id)
+        public async Task<Admin>? DeleteAsync(string jmbg)
         {
-            var admin = await _dbContext.Admins.FindAsync(id);
+            var admin = await _dbContext.Admins.FindAsync(jmbg);
             if (admin == null)
             {
                 return null;
@@ -38,9 +38,9 @@ namespace Infrastructure.Repositories
             return admin;
         }
 
-        public async Task<Admin?> GetByIdAsync(int id)
+        public async Task<Admin?> GetByIdAsync(string jmbg)
         {
-            return await _dbContext.Admins.FirstOrDefaultAsync(a => a.UserId == id);
+            return await _dbContext.Admins.FirstOrDefaultAsync(a => a.JMBG == jmbg);
         }
 
         

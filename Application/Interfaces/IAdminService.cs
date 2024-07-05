@@ -10,8 +10,8 @@ namespace FitnessSystem.Application.Interfaces
     public interface IAdminService
     {
         Task<List<AdminDto>> GetAllAsync();
-        Task<AdminDto> GetByIdAsync(int id);
+        Task<AdminDto> GetByIdAsync(string JMBG);
         Task<AdminDto> CreateAdminAsync(AdminDto adminDto);
-        Task<AdminDeleteDto> DeleteAdminAsync(int id);
+        Task<AdminDeleteDto> DeleteAdminAsync(string JMBG);
     }
 }

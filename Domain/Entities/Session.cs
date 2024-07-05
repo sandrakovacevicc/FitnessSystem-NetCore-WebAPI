@@ -16,7 +16,7 @@ namespace Core.Entities
         public int Capacity { get; set; }
         public int TrainingProgramId { get; set; }
         public TrainingProgram TrainingProgram { get; set; }
-        public int TrainerId { get; set; }
+        public string TrainerJMBG { get; set; }
         public Trainer Trainer { get; set; }
         public int RoomId { get; set; }
         public Room Room { get; set; }

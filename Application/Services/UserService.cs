@@ -45,9 +45,9 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<UserDeleteDto> DeleteUserAsync(int id)
+        public async Task<UserDeleteDto> DeleteUserAsync(string JMBG)
         {
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetByIdAsync(JMBG);
             if (user == null)
             {
                 return null;
@@ -56,7 +56,7 @@ namespace FitnessSystem.Application.Services
             await _unitOfWork.BeginTransactionAsync();
             try
             {
-                var deletedUser = await _userRepository.DeleteAsync(id);
+                var deletedUser = await _userRepository.DeleteAsync(JMBG);
                 await _unitOfWork.CompleteAsync();
                 await _unitOfWork.CommitTransactionAsync();
 
@@ -80,9 +80,9 @@ namespace FitnessSystem.Application.Services
             return usersDto;
         }
 
-        public async Task<UserDto> GetByIdAsync(int id)
+        public async Task<UserDto> GetByIdAsync(string JMBG)
         {
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetByIdAsync(JMBG);
             return _mapper.Map<UserDto>(user);
         }
     }

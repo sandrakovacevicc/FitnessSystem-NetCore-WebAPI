@@ -11,9 +11,9 @@ namespace FitnessSystem.Application.Interfaces
     public interface IUserService
     {
         Task<List<UserDto>> GetAllAsync();
-        Task<UserDto> GetByIdAsync(int id);
+        Task<UserDto> GetByIdAsync(string JMBG);
         Task<UserDto> CreateUserAsync(UserDto userDto);
-        Task<UserDeleteDto> DeleteUserAsync(int id);
+        Task<UserDeleteDto> DeleteUserAsync(string JMBG);
 
 
     }

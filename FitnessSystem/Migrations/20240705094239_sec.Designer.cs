@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessSystem.Presentation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240704082106_second")]
-    partial class second
+    [Migration("20240705094239_sec")]
+    partial class sec
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,8 +60,9 @@ namespace FitnessSystem.Presentation.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientJMBG")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -78,7 +79,7 @@ namespace FitnessSystem.Presentation.Migrations
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientJMBG");
 
                     b.HasIndex("SessionId");
 
@@ -125,8 +126,9 @@ namespace FitnessSystem.Presentation.Migrations
                     b.Property<TimeSpan>("Time")
                         .HasColumnType("time");
 
-                    b.Property<int>("TrainerId")
-                        .HasColumnType("int");
+                    b.Property<string>("TrainerJMBG")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("TrainingProgramId")
                         .HasColumnType("int");
@@ -136,7 +138,7 @@ namespace FitnessSystem.Presentation.Migrations
                     b.HasIndex("RoomId")
                         .IsUnique();
 
-                    b.HasIndex("TrainerId");
+                    b.HasIndex("TrainerJMBG");
 
                     b.HasIndex("TrainingProgramId");
 
@@ -173,11 +175,8 @@ namespace FitnessSystem.Presentation.Migrations
 
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    b.Property<string>("JMBG")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -195,7 +194,7 @@ namespace FitnessSystem.Presentation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("JMBG");
 
                     b.ToTable("Users");
 
@@ -243,7 +242,7 @@ namespace FitnessSystem.Presentation.Migrations
                 {
                     b.HasOne("Core.Entities.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("ClientJMBG")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -268,7 +267,7 @@ namespace FitnessSystem.Presentation.Migrations
 
                     b.HasOne("Core.Entities.Trainer", "Trainer")
                         .WithMany("Sessions")
-                        .HasForeignKey("TrainerId")
+                        .HasForeignKey("TrainerJMBG")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -289,22 +288,22 @@ namespace FitnessSystem.Presentation.Migrations
                 {
                     b.HasOne("Core.Entities.User", null)
                         .WithOne()
-                        .HasForeignKey("Core.Entities.Admin", "UserId")
+                        .HasForeignKey("Core.Entities.Admin", "JMBG")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Client", b =>
                 {
-                    b.HasOne("Core.Entities.MembershipPackage", "MembershipPackage")
-                        .WithMany("Clients")
-                        .HasForeignKey("MembershipPackageId")
+                    b.HasOne("Core.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.Client", "JMBG")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("Core.Entities.Client", "UserId")
+                    b.HasOne("Core.Entities.MembershipPackage", "MembershipPackage")
+                        .WithMany("Clients")
+                        .HasForeignKey("MembershipPackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -315,7 +314,7 @@ namespace FitnessSystem.Presentation.Migrations
                 {
                     b.HasOne("Core.Entities.User", null)
                         .WithOne()
-                        .HasForeignKey("Core.Entities.Trainer", "UserId")
+                        .HasForeignKey("Core.Entities.Trainer", "JMBG")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

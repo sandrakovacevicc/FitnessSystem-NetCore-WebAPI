@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface ITrainerRepository : IRepository<Trainer>
     {
-        Task<Trainer> GetByIdAsync(int id);
+        Task<Trainer> GetByIdAsync(string JMBG);
         Task<Trainer> CreateAsync(Trainer trainer);
-        Task<Trainer> DeleteAsync(int id);
+        Task<Trainer> DeleteAsync(string JMBG);
     }
 }

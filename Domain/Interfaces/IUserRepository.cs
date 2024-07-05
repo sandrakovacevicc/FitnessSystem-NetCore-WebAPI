@@ -10,8 +10,8 @@ namespace Core.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetByIdAsync(int id);
+        Task<User> GetByIdAsync(string JMBG);
         Task<User> CreateAsync(User user);
-        Task<User> DeleteAsync(int id);    
+        Task<User> DeleteAsync(string JMBG);    
     }
 }

@@ -26,9 +26,9 @@ namespace FitnessSystem.Infrastructure.Repositories
             return trainer;
         }
 
-        public async Task<Trainer> DeleteAsync(int id)
+        public async Task<Trainer> DeleteAsync(string jmbg)
         {
-            var trainer = await _dbContext.Trainers.FindAsync(id);
+            var trainer = await _dbContext.Trainers.FindAsync(jmbg);
             if (trainer == null)
             {
                 return null;
@@ -40,9 +40,9 @@ namespace FitnessSystem.Infrastructure.Repositories
             return trainer;
         }
 
-        public async Task<Trainer?> GetByIdAsync(int id)
+        public async Task<Trainer?> GetByIdAsync(string jmbg)
         {
-            return await _dbContext.Trainers.FirstOrDefaultAsync(t => t.UserId == id);
+            return await _dbContext.Trainers.FirstOrDefaultAsync(t => t.JMBG == jmbg);
         }
     }
 }

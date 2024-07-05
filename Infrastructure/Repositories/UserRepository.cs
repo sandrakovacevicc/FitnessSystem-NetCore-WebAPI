@@ -24,9 +24,9 @@ namespace FitnessSystem.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<User> DeleteAsync(int id)
+        public async Task<User> DeleteAsync(string jmbg)
         {
-            var user = await _dbContext.Users.FindAsync(id);
+            var user = await _dbContext.Users.FindAsync(jmbg);
             if (user == null)
             {
                 return null;
@@ -38,9 +38,9 @@ namespace FitnessSystem.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(string jmbg)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.JMBG == jmbg);
         }
     }
 }

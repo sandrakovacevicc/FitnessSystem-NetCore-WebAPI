@@ -14,12 +14,14 @@ namespace FitnessSystem.Data
             base.OnModelCreating(modelBuilder);
 
            
-            modelBuilder.Entity<User>();
-
             
+            modelBuilder.Entity<User>()
+            .HasKey(u => u.JMBG);
+
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Client>().ToTable("Clients");
             modelBuilder.Entity<Trainer>().ToTable("Trainers");
+            
 
             modelBuilder.Entity<Client>().HasMany(c => c.Sessions).WithMany(e => e.Clients)
                 .UsingEntity<Reservation>();

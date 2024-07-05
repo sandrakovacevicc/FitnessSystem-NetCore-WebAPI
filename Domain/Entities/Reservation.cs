@@ -10,7 +10,7 @@ namespace Core.Entities
     public class Reservation
     {
         public int ReservationId { get; set; }
-        public int ClientId { get; set; }
+        public string ClientJMBG { get; set; }
         public int SessionId { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }

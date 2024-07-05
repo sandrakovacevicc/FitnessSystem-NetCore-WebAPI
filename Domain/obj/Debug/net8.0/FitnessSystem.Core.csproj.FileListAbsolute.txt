@@ -5,8 +5,8 @@ C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSyst
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.AssemblyInfoInputs.cache
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.AssemblyInfo.cs
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.csproj.CoreCompileInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.sourcelink.json
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.dll
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\refint\FitnessSystem.Core.dll
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\ref\FitnessSystem.Core.dll
-C:\Users\korisnik\source\repos\FitnessSystem\Domain\obj\Debug\net8.0\FitnessSystem.Core.sourcelink.json

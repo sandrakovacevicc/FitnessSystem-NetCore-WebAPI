@@ -5,6 +5,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Fitn
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.runtimeconfig.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Humanizer.dll
@@ -126,6 +127,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\Fitn
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.csproj.CoreCompileInputs.cache
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.sourcelink.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets\msbuild.FitnessSystem.Presentation.Microsoft.AspNetCore.StaticWebAssets.props
@@ -140,5 +142,3 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\refi
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.genruntimeconfig.cache
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\ref\FitnessSystem.Presentation.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\AutoMapper.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.sourcelink.json

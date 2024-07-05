@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.DTOs;
@@ -45,9 +46,9 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<ClientAddDto>(client);
         }
 
-        public async Task<ClientDeleteDto> DeleteClientAsync(int id)
+        public async Task<ClientDeleteDto> DeleteClientAsync(string jmbg)
         {
-            var client = await _clientRepository.GetByIdAsync(id);
+            var client = await _clientRepository.GetByIdAsync(jmbg);
             if (client == null)
             {
                 return null;
@@ -56,7 +57,7 @@ namespace FitnessSystem.Application.Services
             await _unitOfWork.BeginTransactionAsync();
             try
             {
-                var deletedClient = await _clientRepository.DeleteAsync(id);
+                var deletedClient = await _clientRepository.DeleteAsync(jmbg);
                 await _unitOfWork.CompleteAsync();
                 await _unitOfWork.CommitTransactionAsync();
 
@@ -78,9 +79,9 @@ namespace FitnessSystem.Application.Services
             return clientsDto;
         }
          
-        public async Task<ClientDto> GetByIdAsync(int id)
+        public async Task<ClientDto> GetByIdAsync(string jmbg)
         {
-            var client = await _clientRepository.GetByIdAsync(id);
+            var client = await _clientRepository.GetByIdAsync(jmbg);
             return _mapper.Map<ClientDto>(client);
         }
     }

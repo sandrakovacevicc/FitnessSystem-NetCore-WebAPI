@@ -60,8 +60,7 @@ namespace FitnessSystem.Presentation.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    JMBG = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -69,23 +68,23 @@ namespace FitnessSystem.Presentation.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.JMBG);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Admins",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    JMBG = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.UserId);
+                    table.PrimaryKey("PK_Admins", x => x.JMBG);
                     table.ForeignKey(
-                        name: "FK_Admins_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Admins_Users_JMBG",
+                        column: x => x.JMBG,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "JMBG",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -93,12 +92,14 @@ namespace FitnessSystem.Presentation.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    MembershipPackageId = table.Column<int>(type: "int", nullable: false)
+                    JMBG = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MembershipPackageId = table.Column<int>(type: "int", nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.UserId);
+                    table.PrimaryKey("PK_Clients", x => x.JMBG);
                     table.ForeignKey(
                         name: "FK_Clients_MembershipPackages_MembershipPackageId",
                         column: x => x.MembershipPackageId,
@@ -106,10 +107,10 @@ namespace FitnessSystem.Presentation.Migrations
                         principalColumn: "MembershipPackageId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Clients_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Clients_Users_JMBG",
+                        column: x => x.JMBG,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "JMBG",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -117,17 +118,17 @@ namespace FitnessSystem.Presentation.Migrations
                 name: "Trainers",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    JMBG = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Specialty = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trainers", x => x.UserId);
+                    table.PrimaryKey("PK_Trainers", x => x.JMBG);
                     table.ForeignKey(
-                        name: "FK_Trainers_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Trainers_Users_JMBG",
+                        column: x => x.JMBG,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "JMBG",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -143,6 +144,7 @@ namespace FitnessSystem.Presentation.Migrations
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     TrainingProgramId = table.Column<int>(type: "int", nullable: false),
                     TrainerId = table.Column<int>(type: "int", nullable: false),
+                    TrainerJMBG = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -155,10 +157,10 @@ namespace FitnessSystem.Presentation.Migrations
                         principalColumn: "RoomId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sessions_Trainers_TrainerId",
-                        column: x => x.TrainerId,
+                        name: "FK_Sessions_Trainers_TrainerJMBG",
+                        column: x => x.TrainerJMBG,
                         principalTable: "Trainers",
-                        principalColumn: "UserId",
+                        principalColumn: "JMBG",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Sessions_TrainingPrograms_TrainingProgramId",
@@ -178,16 +180,17 @@ namespace FitnessSystem.Presentation.Migrations
                     SessionId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Time = table.Column<TimeSpan>(type: "time", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientJMBG = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.ReservationId);
                     table.ForeignKey(
-                        name: "FK_Reservations_Clients_ClientId",
-                        column: x => x.ClientId,
+                        name: "FK_Reservations_Clients_ClientJMBG",
+                        column: x => x.ClientJMBG,
                         principalTable: "Clients",
-                        principalColumn: "UserId",
+                        principalColumn: "JMBG",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reservations_Sessions_SessionId",
@@ -203,9 +206,9 @@ namespace FitnessSystem.Presentation.Migrations
                 column: "MembershipPackageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_ClientId",
+                name: "IX_Reservations_ClientJMBG",
                 table: "Reservations",
-                column: "ClientId");
+                column: "ClientJMBG");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_SessionId",
@@ -219,9 +222,9 @@ namespace FitnessSystem.Presentation.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessions_TrainerId",
+                name: "IX_Sessions_TrainerJMBG",
                 table: "Sessions",
-                column: "TrainerId");
+                column: "TrainerJMBG");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_TrainingProgramId",

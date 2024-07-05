@@ -47,6 +47,8 @@ namespace FitnessSystem.Infrastructure.Repositories
                     .ThenInclude(s => s.TrainingProgram)
                  .Include(r => r.Session)
                     .ThenInclude(s => s.Room)
+                    .Include(r => r.Session)
+                    .ThenInclude(s => s.Trainer)
                 .FirstOrDefaultAsync(r => r.ReservationId == id);
         }
 

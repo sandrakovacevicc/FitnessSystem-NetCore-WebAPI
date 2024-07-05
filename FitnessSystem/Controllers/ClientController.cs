@@ -24,10 +24,10 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(clients);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{jmbg}")]
+        public async Task<IActionResult> GetById(string jmbg)
         {
-            var clientDto = await _clientService.GetByIdAsync(id);
+            var clientDto = await _clientService.GetByIdAsync(jmbg);
             if (clientDto == null)
             {
                 return NotFound();
@@ -54,10 +54,10 @@ namespace FitnessSystem.Presentation.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClient(int id)
+        [HttpDelete("{jmbg}")]
+        public async Task<IActionResult> DeleteClient(string jmbg)
         {
-            var clientToDelete = await _clientService.DeleteClientAsync(id);
+            var clientToDelete = await _clientService.DeleteClientAsync(jmbg);
             if (clientToDelete == null)
             {
                 return NotFound(new { message = "User not found." });

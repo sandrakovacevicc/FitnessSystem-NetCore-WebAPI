@@ -8,7 +8,7 @@ namespace FitnessSystem.Application.DTOs
 {
     public class ReservationAddDto
     {
-        public int ClientId { get; set; }
+        public string ClientJMBG { get; set; }
         public int SessionId { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }

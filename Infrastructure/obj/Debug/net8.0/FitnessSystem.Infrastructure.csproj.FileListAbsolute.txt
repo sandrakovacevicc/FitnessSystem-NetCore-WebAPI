@@ -9,10 +9,10 @@ C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\Fit
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.AssemblyInfoInputs.cache
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.AssemblyInfo.cs
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.sourcelink.json
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessS.CCF6786F.Up2Date
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.dll
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\refint\FitnessSystem.Infrastructure.dll
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.genruntimeconfig.cache
 C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\ref\FitnessSystem.Infrastructure.dll
-C:\Users\korisnik\source\repos\FitnessSystem\Infrastructure\obj\Debug\net8.0\FitnessSystem.Infrastructure.sourcelink.json

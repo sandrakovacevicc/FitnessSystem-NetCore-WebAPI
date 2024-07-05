@@ -46,9 +46,9 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<TrainerAddDto>(trainer);
         }
 
-        public async Task<TrainerDeleteDto> DeleteTrainerAsync(int id)
+        public async Task<TrainerDeleteDto> DeleteTrainerAsync(string jmbg)
         {
-            var trainer = await _trainerRepository.GetByIdAsync(id);
+            var trainer = await _trainerRepository.GetByIdAsync(jmbg);
             if (trainer == null)
             {
                 return null;
@@ -57,7 +57,7 @@ namespace FitnessSystem.Application.Services
             await _unitOfWork.BeginTransactionAsync();
             try
             {
-                var deletedTrainer = await _trainerRepository.DeleteAsync(id);
+                var deletedTrainer = await _trainerRepository.DeleteAsync(jmbg);
                 await _unitOfWork.CompleteAsync();
                 await _unitOfWork.CommitTransactionAsync();
 
@@ -80,9 +80,9 @@ namespace FitnessSystem.Application.Services
 
         }
 
-        public async Task<TrainerDto> GetByIdAsync(int id)
+        public async Task<TrainerDto> GetByIdAsync(string jmbg)
         {
-            var trainer = await _trainerRepository.GetByIdAsync(id);
+            var trainer = await _trainerRepository.GetByIdAsync(jmbg);
             return _mapper.Map<TrainerDto>(trainer);
         }
     }

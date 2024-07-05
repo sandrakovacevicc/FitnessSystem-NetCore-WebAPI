@@ -10,8 +10,8 @@ namespace FitnessSystem.Application.Interfaces
     public interface ITrainerService
     {
         Task<List<TrainerDto>> GetAllAsync();
-        Task<TrainerDto> GetByIdAsync(int id);
+        Task<TrainerDto> GetByIdAsync(string JMBG);
         Task<TrainerAddDto> CreateTrainerAsync(TrainerAddDto trainerAddDto);
-        Task<TrainerDeleteDto> DeleteTrainerAsync(int id);
+        Task<TrainerDeleteDto> DeleteTrainerAsync(string JMBG);
     }
 }

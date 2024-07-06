@@ -17,12 +17,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        public async Task<Room> CreateAsync(Room room)
-        {
-            await _dbContext.Rooms.AddAsync(room);
-            await _dbContext.SaveChangesAsync();
-            return room;
-        }
 
         public async Task<Room> DeleteAsync(int id)
         {

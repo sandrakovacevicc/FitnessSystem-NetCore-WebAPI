@@ -17,12 +17,6 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<Admin> CreateAsync(Admin admin)
-        {
-            await _dbContext.Admins.AddAsync(admin);
-            await _dbContext.SaveChangesAsync();
-            return admin;
-        }
 
         public async Task<Admin>? DeleteAsync(string jmbg)
         {

@@ -11,7 +11,6 @@ namespace Core.Interfaces
     public interface IClientRepository : IRepository<Client>
     {
         Task<Client> GetByIdAsync(string JMBG);
-        Task<Client> CreateAsync(Client client);
         Task<Client> DeleteAsync(string JMBG);
     }
 }

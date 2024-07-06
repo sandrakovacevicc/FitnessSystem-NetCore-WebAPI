@@ -46,6 +46,13 @@ namespace FitnessSystem.Infrastructure.Repositories.Base
             }
         }
 
+        public async Task CreateAsync(TEntity entity)
+        {
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+
 
     }
 }

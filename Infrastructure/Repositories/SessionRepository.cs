@@ -17,12 +17,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        public async Task<Session> CreateAsync(Session session)
-        {
-            await _dbContext.Sessions.AddAsync(session);
-            await _dbContext.SaveChangesAsync();
-            return session;
-        }
 
         public async Task<Session> DeleteAsync(int id)
         {

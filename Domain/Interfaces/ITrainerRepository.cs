@@ -11,7 +11,6 @@ namespace Core.Interfaces
     public interface ITrainerRepository : IRepository<Trainer>
     {
         Task<Trainer> GetByIdAsync(string JMBG);
-        Task<Trainer> CreateAsync(Trainer trainer);
         Task<Trainer> DeleteAsync(string JMBG);
     }
 }

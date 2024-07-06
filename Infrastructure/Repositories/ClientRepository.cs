@@ -17,12 +17,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        public async Task<Client> CreateAsync(Client client)
-        {
-            await _dbContext.Clients.AddAsync(client);
-            await _dbContext.SaveChangesAsync();
-            return client;
-        }
 
         public async Task<Client> DeleteAsync(string jmbg)
         {

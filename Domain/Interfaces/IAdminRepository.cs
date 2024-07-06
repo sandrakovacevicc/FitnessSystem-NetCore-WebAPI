@@ -11,7 +11,6 @@ namespace Core.Interfaces
     public interface IAdminRepository :  IRepository<Admin>
     {
         Task<Admin> GetByIdAsync(string JMBG);
-        Task<Admin> CreateAsync(Admin admin);
         Task<Admin> DeleteAsync(string JMBG);
     }
 }

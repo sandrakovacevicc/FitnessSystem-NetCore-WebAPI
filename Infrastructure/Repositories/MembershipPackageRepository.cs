@@ -17,12 +17,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-        public async Task<MembershipPackage> CreateAsync(MembershipPackage package)
-        {
-            await _dbContext.MembershipPackages.AddAsync(package);
-            await _dbContext.SaveChangesAsync();
-            return package;
-        }
 
         public async Task<MembershipPackage> DeleteAsync(int id)
         {

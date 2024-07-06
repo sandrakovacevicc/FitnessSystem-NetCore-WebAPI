@@ -67,7 +67,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpPut("{jmbg}")]
-        public async Task<ActionResult<ClientAddDto>> UpdateClient(string jmbg, [FromBody] ClientUpdateDto clientUpdateDto)
+        public async Task<ActionResult<ClientDto>> UpdateClient(string jmbg, [FromBody] ClientUpdateDto clientUpdateDto)
         {
             if (!ModelState.IsValid)
             {

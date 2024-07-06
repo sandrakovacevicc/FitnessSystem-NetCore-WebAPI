@@ -67,5 +67,29 @@ namespace FitnessSystem.Presentation.Controllers
 
             return Ok(new { message = "Session deleted successfully.", reservation = sessionToDelete });
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SessionDto>> UpdateClient(int id, [FromBody] SessionUpdateDto sessionUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updatedSession = await _sessionService.UpdateSessionAsync(id, sessionUpdateDto);
+                return Ok(updatedSession);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
     }
 }

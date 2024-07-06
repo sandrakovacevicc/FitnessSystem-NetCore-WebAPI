@@ -89,7 +89,7 @@ namespace FitnessSystem.Application.Services
             var program = await _programRepository.GetByIdAsync(id);
             if (program == null)
             {
-                throw new KeyNotFoundException("TrainingProgram not found.");
+                throw new KeyNotFoundException("Training program not found.");
             }
 
             program.Description = trainingProgramDto.Description;

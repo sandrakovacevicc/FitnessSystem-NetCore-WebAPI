@@ -89,7 +89,7 @@ namespace FitnessSystem.Application.Services
             var membershipPackage = await _membershipPackageRepository.GetByIdAsync(id);
             if (membershipPackage == null)
             {
-                throw new KeyNotFoundException("MembershipPackage not found.");
+                throw new KeyNotFoundException("Membership package not found.");
             }
 
             membershipPackage.Description = membershipPackageDto.Description;

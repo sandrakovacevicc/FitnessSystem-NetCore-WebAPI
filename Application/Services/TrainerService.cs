@@ -91,7 +91,7 @@ namespace FitnessSystem.Application.Services
             var trainer = await _trainerRepository.GetByIdAsync(jmbg);
             if (trainer == null)
             {
-                throw new KeyNotFoundException("User not found.");
+                throw new KeyNotFoundException("Trainer not found.");
             }
 
             trainer.Name = trainerUpdateDto.Name;

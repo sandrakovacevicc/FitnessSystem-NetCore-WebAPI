@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace FitnessSystem.Application.Services
 {
@@ -85,7 +86,7 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<ClientDto>(client);
         }
 
-        public async Task<ClientAddDto> UpdateClientAsync(string jmbg, ClientUpdateDto clientUpdateDto)
+        public async Task<ClientDto> UpdateClientAsync(string jmbg, ClientUpdateDto clientUpdateDto)
         {
             var client = await _clientRepository.GetByIdAsync(jmbg);
             if (client == null)
@@ -108,17 +109,7 @@ namespace FitnessSystem.Application.Services
                 await _unitOfWork.CompleteAsync();
                 await _unitOfWork.CommitTransactionAsync();
 
-                var clientDto = new ClientAddDto
-                {
-                    JMBG = client.JMBG,
-                    Name = client.Name,
-                    Surname = client.Surname,
-                    Email = client.Email,
-                    Password = client.Password,
-                    MobileNumber = client.MobileNumber,
-                    Birthdate = client.Birthdate,
-                    MembershipPackageId = client.MembershipPackageId
-                };
+                var clientDto = _mapper.Map<ClientDto>(client);
 
                 return clientDto;
             }

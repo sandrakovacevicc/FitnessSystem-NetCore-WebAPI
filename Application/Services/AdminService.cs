@@ -89,7 +89,7 @@ namespace FitnessSystem.Application.Services
             var admin = await _adminRepository.GetByIdAsync(jmbg);
             if (admin == null)
             {
-                throw new KeyNotFoundException("User not found.");
+                throw new KeyNotFoundException("Admin not found.");
             }
 
             admin.Name = adminUpdateDto.Name;

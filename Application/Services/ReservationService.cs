@@ -87,5 +87,37 @@ namespace FitnessSystem.Application.Services
             var reservation = await _reservationRepository.GetByIdAsync(id);
             return _mapper.Map<ReservationDto>(reservation);
         }
+
+        public async Task<ReservationDto> UpdateReservationAsync(int id, ReservationUpdateDto reservationUpdateDto)
+        {
+            var reservation = await _reservationRepository.GetByIdAsync(id);
+            if (reservation == null)
+            {
+                throw new KeyNotFoundException("Reservation not found.");
+            }
+
+            reservation.Status = reservationUpdateDto.Status;
+            reservation.Date = reservationUpdateDto.Date;
+            reservation.SessionId = reservationUpdateDto.SessionId;
+            reservation.ClientJMBG = reservationUpdateDto.ClientJMBG;
+            reservation.Time = reservationUpdateDto.Time;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                await _reservationRepository.UpdateAsync(reservation, id);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                var reservationDto = _mapper.Map<ReservationDto>(reservation);
+
+                return reservationDto;
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

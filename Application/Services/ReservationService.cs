@@ -69,14 +69,49 @@ namespace FitnessSystem.Application.Services
             }
         }
 
-        public async Task<List<ReservationDto>> GetAllAsync()
+        public async Task<List<ReservationDto>> GetAllAsync(string? filterBy = null,string? filterValue = null,string? sortBy = null,bool ascending = true,int pageNumber = 1,int pageSize = 10)
         {
-            
-            var reservations = _reservationRepository.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage").ToList();
+            var query = _reservationRepository.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage");
 
             
+            if (string.IsNullOrWhiteSpace(filterBy) == false && string.IsNullOrWhiteSpace(filterValue) == false)
+            {
+                if (filterBy.Equals("ClientJMBG", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(r => r.Client.JMBG.Contains(filterValue));
+                }
+                else if (filterBy.Equals("Status", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(r => r.Status == filterValue);
+                }
+            }
+
+            
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortBy.Equals("Date", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = ascending ? query.OrderBy(r => r.Date) : query.OrderByDescending(r => r.Date);
+                }
+                else if (sortBy.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = ascending ? query.OrderBy(r => r.Time) : query.OrderByDescending(r => r.Time);
+                }
+            }
+
+            query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            var reservations = query.ToList();
             var reservationsDto = _mapper.Map<List<ReservationDto>>(reservations);
+            return reservationsDto;
+        }
 
+        public async Task<List<ReservationDto>> GetReservationsByClientJmbgAsync(string clientJmbg)
+        {
+            var reservations = _reservationRepository.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage")
+                .Where(r => r.Client.JMBG == clientJmbg);
+
+            var reservationsDto = _mapper.Map<List<ReservationDto>>(reservations);
             return reservationsDto;
         }
 

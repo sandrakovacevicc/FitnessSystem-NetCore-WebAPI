@@ -18,11 +18,25 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ReservationDto>>> GetAll()
+        public async Task<ActionResult<List<ReservationDto>>> GetAll(
+        [FromQuery] string filterBy,
+        [FromQuery] string filterValue,
+        [FromQuery] string sortBy,
+        [FromQuery] bool ascending,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
         {
-            var reservations = await _reservationService.GetAllAsync();
+            var reservations = await _reservationService.GetAllAsync(filterBy, filterValue, sortBy, ascending, pageNumber, pageSize);
             return Ok(reservations);
         }
+
+        [HttpGet("clients/{clientJmbg}")]
+        public async Task<ActionResult<List<ReservationDto>>> GetReservationsByClientJmbg(string clientJmbg)
+        {
+            var reservations = await _reservationService.GetReservationsByClientJmbgAsync(clientJmbg);
+            return Ok(reservations);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

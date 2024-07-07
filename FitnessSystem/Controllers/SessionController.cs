@@ -18,11 +18,18 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<SessionDto>>> GetAll()
+        public async Task<ActionResult<List<SessionDto>>> GetAll(
+        [FromQuery] string filterBy,
+        [FromQuery] string filterValue,
+        [FromQuery] string sortBy,
+        [FromQuery] bool ascending,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
         {
-            var sessions = await _sessionService.GetAllAsync();
+            var sessions = await _sessionService.GetAllAsync(filterBy, filterValue, sortBy, ascending, pageNumber, pageSize);
             return Ok(sessions);
         }
+
 
 
         [HttpGet("{id}")]

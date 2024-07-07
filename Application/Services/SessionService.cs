@@ -69,14 +69,45 @@ namespace FitnessSystem.Application.Services
             }
         }
 
-        public async Task<List<SessionDto>> GetAllAsync()
+        public async Task<List<SessionDto>> GetAllAsync(string filterBy = null,string filterValue = null,string sortBy = null,bool ascending = true,int pageNumber = 1,int pageSize = 10)
         {
-            var sessions =  _sessionRepository.GetAll("Trainer,Room,TrainingProgram").ToList();
+            var query = _sessionRepository.GetAll("Trainer,Room,TrainingProgram");
 
+
+            if (string.IsNullOrWhiteSpace(filterBy) == false && string.IsNullOrWhiteSpace(filterValue) == false)
+            {
+                if (filterBy.Equals("TrainerJMBG", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(r => r.Trainer.JMBG.Contains(filterValue));
+                }
+                else if (filterBy.Equals("RoomId", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (int.TryParse(filterValue, out int roomId))
+                    {
+                        query = query.Where(s => s.RoomId == roomId);
+                    }
+                }
+            }
+
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortBy == "Date")
+                {
+                    query = ascending ? query.OrderBy(s => s.Date) : query.OrderByDescending(s => s.Date);
+                }
+                else if (sortBy.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = ascending ? query.OrderBy(s => s.Time) : query.OrderByDescending(s => s.Time);
+                }
+
+            }
+
+            query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            var sessions =  query.ToList();
             var sessionsDto = _mapper.Map<List<SessionDto>>(sessions);
-
             return sessionsDto;
-
         }
 
         public async Task<SessionDto> GetByIdAsync(int id)

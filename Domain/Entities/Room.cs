@@ -12,7 +12,7 @@ namespace Core.Entities
         public int RoomId { get; set; }
         public string RoomName { get; set; }
         [JsonIgnore]
-        public Session Session { get; set; }
+        public List<Session> Sessions { get; set; }
 
     }
 }

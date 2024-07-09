@@ -97,7 +97,6 @@ namespace FitnessSystem.Application.Services
             trainer.Name = trainerUpdateDto.Name;
             trainer.Surname = trainerUpdateDto.Surname;
             trainer.Email = trainerUpdateDto.Email;
-            trainer.Password = trainerUpdateDto.Password;
             trainer.Specialty = trainerUpdateDto.Specialty;
 
             await _unitOfWork.BeginTransactionAsync();
@@ -113,7 +112,6 @@ namespace FitnessSystem.Application.Services
                     Name = trainer.Name,
                     Surname = trainer.Surname,
                     Email = trainer.Email,
-                    Password = trainer.Password,
                     Specialty = trainer.Specialty,
                 };
 

@@ -1,6 +1,8 @@
 ﻿using FitnessSystem.Application.DTOs;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +10,7 @@ namespace FitnessSystem.Presentation.Controllers
 {
     [Route("api/admins")]
     [ApiController]
+    
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;
@@ -18,6 +21,8 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<ActionResult<List<AdminDto>>> GetAll()
         {
             var admins = await _adminService.GetAllAsync();

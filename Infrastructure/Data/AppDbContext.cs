@@ -1,9 +1,11 @@
 ﻿using Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessSystem.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -13,21 +15,46 @@ namespace FitnessSystem.Data
         {
             base.OnModelCreating(modelBuilder);
 
-           
-            
-            modelBuilder.Entity<User>()
-            .HasKey(u => u.JMBG);
+            var roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Id = "admin-role",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                },
+                new IdentityRole
+                {
+                    Id = "trainer-role",
+                    Name = "Trainer",
+                    NormalizedName = "TRAINER"
+                },
+                new IdentityRole
+                {
+                    Id = "client-role",
+                    Name = "Client",
+                    NormalizedName = "CLIENT"
+                }
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(u => u.JMBG);
+                entity.ToTable("Users");
+            });
 
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Client>().ToTable("Clients");
             modelBuilder.Entity<Trainer>().ToTable("Trainers");
-            
 
-            modelBuilder.Entity<Client>().HasMany(c => c.Sessions).WithMany(e => e.Clients)
+            modelBuilder.Entity<Client>()
+                .HasMany(c => c.Sessions)
+                .WithMany(e => e.Clients)
                 .UsingEntity<Reservation>();
         }
 
-       
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<MembershipPackage> MembershipPackages { get; set; }

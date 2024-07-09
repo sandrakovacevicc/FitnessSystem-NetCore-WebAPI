@@ -97,7 +97,6 @@ namespace FitnessSystem.Application.Services
             client.Name = clientUpdateDto.Name;
             client.Surname = clientUpdateDto.Surname;
             client.Email = clientUpdateDto.Email;
-            client.Password = clientUpdateDto.Password;
             client.Birthdate = clientUpdateDto.Birthdate;
             client.MembershipPackageId = clientUpdateDto.MembershipPackageId;
             client.MobileNumber = clientUpdateDto.MobileNumber;

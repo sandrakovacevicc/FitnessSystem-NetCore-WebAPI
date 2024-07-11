@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
-using FitnessSystem.Application.DTOs;
+using FitnessSystem.Application.DTOs.TrainingProgram;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System;

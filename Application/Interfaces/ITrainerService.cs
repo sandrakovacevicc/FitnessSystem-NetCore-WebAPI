@@ -1,4 +1,4 @@
-﻿using FitnessSystem.Application.DTOs;
+﻿using FitnessSystem.Application.DTOs.Trainer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

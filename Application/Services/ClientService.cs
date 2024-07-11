@@ -2,7 +2,7 @@
 using AutoMapper.Configuration.Annotations;
 using Core.Entities;
 using Core.Interfaces;
-using FitnessSystem.Application.DTOs;
+using FitnessSystem.Application.DTOs.Client;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System;

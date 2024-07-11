@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-using FitnessSystem.Application.DTOs;
+using FitnessSystem.Application.DTOs.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

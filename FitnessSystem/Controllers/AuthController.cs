@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 using FitnessSystem.Application.DTOs;
-using Core.Dtos;
 using FitnessSystem.Application.Interfaces;
+using FitnessSystem.Application.DTOs.Login;
 
 namespace Presentation.Controllers
 {

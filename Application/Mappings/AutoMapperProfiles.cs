@@ -1,6 +1,14 @@
 ﻿using AutoMapper;
 using Core.Entities;
-using FitnessSystem.Application.DTOs;
+using FitnessSystem.Application.DTOs.Admin;
+using FitnessSystem.Application.DTOs.Client;
+using FitnessSystem.Application.DTOs.MembershipPackage;
+using FitnessSystem.Application.DTOs.Reservation;
+using FitnessSystem.Application.DTOs.Room;
+using FitnessSystem.Application.DTOs.Session;
+using FitnessSystem.Application.DTOs.Trainer;
+using FitnessSystem.Application.DTOs.TrainingProgram;
+using FitnessSystem.Application.DTOs.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

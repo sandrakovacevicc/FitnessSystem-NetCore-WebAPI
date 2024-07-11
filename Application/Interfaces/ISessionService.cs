@@ -1,4 +1,4 @@
-﻿using FitnessSystem.Application.DTOs;
+﻿using FitnessSystem.Application.DTOs.Session;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;

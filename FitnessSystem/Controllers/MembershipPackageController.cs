@@ -1,4 +1,4 @@
-﻿using FitnessSystem.Application.DTOs;
+﻿using FitnessSystem.Application.DTOs.MembershipPackage;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;

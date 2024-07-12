@@ -13,6 +13,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<RoomDto> GetByIdAsync(int id);
         Task<RoomDto> CreateRoomAsync(RoomDto roomDto);
         Task<RoomDeleteDto> DeleteRoomAsync(int id);
-        Task<RoomDeleteDto> UpdateRoomAsync(int id, RoomDto roomDto);
+        Task<RoomDto> UpdateRoomAsync(int id, RoomDto roomDto);
     }
 }

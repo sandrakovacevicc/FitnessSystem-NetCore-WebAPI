@@ -234,6 +234,9 @@ namespace FitnessSystem.Presentation.Migrations
 
                     b.HasKey("JMBG");
 
+                    b.HasIndex("JMBG")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 

@@ -14,8 +14,8 @@ namespace FitnessSystem.Application.DTOs.Session
         public TimeSpan Time { get; set; }
         public int Duration { get; set; }
         public int Capacity { get; set; }
-        public TrainingProgram TrainingProgram { get; set; }
-        public Trainer Trainer { get; set; }
-        public Room Room { get; set; }
+        public TrainingProgram.TrainingProgramDto TrainingProgram { get; set; }
+        public Trainer.TrainerDto Trainer { get; set; }
+        public Room.RoomDto Room { get; set; }
     }
 }

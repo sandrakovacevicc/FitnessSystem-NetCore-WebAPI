@@ -4,23 +4,19 @@ using Core.Interfaces;
 using FitnessSystem.Application.DTOs.Room;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Services
 {
     public class RoomService : IRoomService
     {
-        private readonly IRoomRepository _roomRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RoomService(IRoomRepository roomRepository, IMapper mapper, IUnitOfWork unitOfWork)
+        public RoomService(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _roomRepository = roomRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -28,93 +24,49 @@ namespace FitnessSystem.Application.Services
         public async Task<RoomDto> CreateRoomAsync(RoomDto roomDto)
         {
             var room = _mapper.Map<Room>(roomDto);
-
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await _roomRepository.CreateAsync(room);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
-
+            await _unitOfWork.Rooms.CreateAsync(room);
+            await _unitOfWork.CompleteAsync();
             return _mapper.Map<RoomDto>(room);
         }
 
         public async Task<RoomDeleteDto> DeleteRoomAsync(int id)
         {
-            var room = await _roomRepository.GetByIdAsync(id);
+            var room = await _unitOfWork.Rooms.GetByIdAsync(id);
             if (room == null)
             {
                 return null;
             }
 
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                var deletedRoom = await _roomRepository.DeleteAsync(id);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-
-                return _mapper.Map<RoomDeleteDto>(deletedRoom);
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
+            await _unitOfWork.Rooms.DeleteAsync(id);
+            await _unitOfWork.CompleteAsync();
+            return _mapper.Map<RoomDeleteDto>(room);
         }
 
         public async Task<List<RoomDto>> GetAllAsync()
         {
-            var rooms =  _roomRepository.GetAll().ToList();
-
-            var roomsDto = _mapper.Map<List<RoomDto>>(rooms);
-
-            return roomsDto;
-
+            var rooms = _unitOfWork.Rooms.GetAll().ToList();
+            return _mapper.Map<List<RoomDto>>(rooms);
         }
 
         public async Task<RoomDto> GetByIdAsync(int id)
         {
-            var room = await _roomRepository.GetByIdAsync(id);
+            var room = await _unitOfWork.Rooms.GetByIdAsync(id);
             return _mapper.Map<RoomDto>(room);
         }
 
-        public async Task<RoomDeleteDto> UpdateRoomAsync(int id, RoomDto roomDto)
+        public async Task<RoomDto> UpdateRoomAsync(int id, RoomDto roomDto)
         {
-            var room = await _roomRepository.GetByIdAsync(id);
+            var room = await _unitOfWork.Rooms.GetByIdAsync(id);
             if (room == null)
             {
                 throw new KeyNotFoundException("Room not found.");
             }
 
-            room.RoomName = roomDto.RoomName;
+            _mapper.Map(roomDto, room);
+            await _unitOfWork.Rooms.UpdateAsync(room, id);
+            await _unitOfWork.CompleteAsync();
 
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await _roomRepository.UpdateAsync(room, id);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-
-                var roomUpdateDto = new RoomDeleteDto
-                {
-                   RoomId = room.RoomId,
-                   RoomName = room.RoomName
-                };
-
-                return roomUpdateDto;
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
+            return _mapper.Map<RoomDto>(room);
         }
     }
 }

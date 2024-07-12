@@ -4,23 +4,19 @@ using Core.Interfaces;
 using FitnessSystem.Application.DTOs.Session;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Services
 {
     public class SessionService : ISessionService
     {
-        private readonly ISessionRepository _sessionRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SessionService(ISessionRepository sessionRepository, IMapper mapper, IUnitOfWork unitOfWork)
+        public SessionService(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _sessionRepository = sessionRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -28,51 +24,27 @@ namespace FitnessSystem.Application.Services
         public async Task<SessionAddDto> CreateSessionAsync(SessionAddDto sessionAddDto)
         {
             var session = _mapper.Map<Session>(sessionAddDto);
-
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await _sessionRepository.CreateAsync(session);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
-
+            await _unitOfWork.Sessions.CreateAsync(session);
+            await _unitOfWork.CompleteAsync();
             return _mapper.Map<SessionAddDto>(session);
         }
 
         public async Task<SessionDeleteDto> DeleteSessionAsync(int id)
         {
-            var session = await _sessionRepository.GetByIdAsync(id);
+            var session = await _unitOfWork.Sessions.GetByIdAsync(id);
             if (session == null)
             {
                 return null;
             }
 
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                var deletedSession = await _sessionRepository.DeleteAsync(id);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-
-                return _mapper.Map<SessionDeleteDto>(deletedSession);
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
+            await _unitOfWork.Sessions.DeleteAsync(id);
+            await _unitOfWork.CompleteAsync();
+            return _mapper.Map<SessionDeleteDto>(session);
         }
 
-        public async Task<List<SessionDto>> GetAllAsync(string filterBy = null,string filterValue = null,string sortBy = null,bool ascending = true,int pageNumber = 1,int pageSize = 10)
+        public async Task<List<SessionDto>> GetAllAsync(string filterBy = null, string filterValue = null, string sortBy = null, bool ascending = true, int pageNumber = 1, int pageSize = 10)
         {
-            var query = _sessionRepository.GetAll("Trainer,Room,TrainingProgram");
-
+            var query = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram");
 
             if (string.IsNullOrWhiteSpace(filterBy) == false && string.IsNullOrWhiteSpace(filterValue) == false)
             {
@@ -102,23 +74,21 @@ namespace FitnessSystem.Application.Services
                 }
 
             }
-
             query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
             var sessions =  query.ToList();
-            var sessionsDto = _mapper.Map<List<SessionDto>>(sessions);
-            return sessionsDto;
+            return _mapper.Map<List<SessionDto>>(sessions);
         }
 
         public async Task<SessionDto> GetByIdAsync(int id)
         {
-            var session = await _sessionRepository.GetByIdAsync(id);
+            var session = await _unitOfWork.Sessions.GetByIdAsync(id);
             return _mapper.Map<SessionDto>(session);
         }
 
         public async Task<SessionDto> UpdateSessionAsync(int id, SessionUpdateDto sessionUpdateDto)
         {
-            var session = await _sessionRepository.GetByIdAsync(id);
+            var session = await _unitOfWork.Sessions.GetByIdAsync(id);
             if (session == null)
             {
                 throw new KeyNotFoundException("Session not found.");
@@ -132,22 +102,10 @@ namespace FitnessSystem.Application.Services
             session.TrainerJMBG = sessionUpdateDto.TrainerJMBG;
             session.TrainingProgramId = sessionUpdateDto.TrainingProgramId;
 
-            await _unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await _sessionRepository.UpdateAsync(session, id);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
+            await _unitOfWork.Sessions.UpdateAsync(session, id);
+            await _unitOfWork.CompleteAsync();
 
-                var sessionDto = _mapper.Map<SessionDto>(session);
-
-                return sessionDto;
-            }
-            catch
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                throw;
-            }
+            return _mapper.Map<SessionDto>(session);
         }
     }
 }

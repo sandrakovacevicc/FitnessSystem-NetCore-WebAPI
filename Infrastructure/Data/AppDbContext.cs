@@ -42,6 +42,7 @@ namespace FitnessSystem.Data
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.JMBG);
+                entity.HasIndex(u => u.JMBG).IsUnique(); 
                 entity.ToTable("Users");
             });
 

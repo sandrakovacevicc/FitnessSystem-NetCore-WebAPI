@@ -13,6 +13,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<TrainingProgramDto> GetByIdAsync(int id);
         Task<TrainingProgramDto> CreateTrainingProgramAsync(TrainingProgramDto trainingProgramDto);
         Task<TrainingProgramDeleteDto> DeleteTrainingProgramAsync(int id);
-        Task<TrainingProgramDeleteDto> UpdateTrainingProgramAsync(int id, TrainingProgramDto trainingProgramDto);
+        Task<TrainingProgramDto> UpdateTrainingProgramAsync(int id, TrainingProgramDto trainingProgramDto);
     }
 }

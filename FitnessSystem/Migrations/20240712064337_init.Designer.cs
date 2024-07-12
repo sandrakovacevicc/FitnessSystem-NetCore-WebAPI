@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessSystem.Presentation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240709072732_removed password plain text from user")]
-    partial class removedpasswordplaintextfromuser
+    [Migration("20240712064337_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,6 +236,9 @@ namespace FitnessSystem.Presentation.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("JMBG");
+
+                    b.HasIndex("JMBG")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");

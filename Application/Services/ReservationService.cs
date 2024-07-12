@@ -46,7 +46,7 @@ namespace FitnessSystem.Application.Services
         {
             var query = _unitOfWork.Reservations.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage");
 
-            if (string.IsNullOrWhiteSpace(filterBy) == false && string.IsNullOrWhiteSpace(filterValue) == false)
+            if (!string.IsNullOrWhiteSpace(filterBy) && !string.IsNullOrWhiteSpace(filterValue))
             {
                 if (filterBy.Equals("ClientJMBG", StringComparison.OrdinalIgnoreCase))
                 {
@@ -57,7 +57,6 @@ namespace FitnessSystem.Application.Services
                     query = query.Where(r => r.Status == filterValue);
                 }
             }
-
 
             if (!string.IsNullOrEmpty(sortBy))
             {
@@ -72,7 +71,7 @@ namespace FitnessSystem.Application.Services
             }
             query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
-            var reservations =  query.ToList();
+            var reservations = query.ToList();
             return _mapper.Map<List<ReservationDto>>(reservations);
         }
 

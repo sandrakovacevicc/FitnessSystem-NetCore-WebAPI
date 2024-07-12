@@ -3,10 +3,6 @@ using Core.Interfaces;
 using FitnessSystem.Data;
 using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
@@ -17,8 +13,7 @@ namespace Infrastructure.Repositories
         {
         }
 
-
-        public async Task<Admin>? DeleteAsync(string jmbg)
+        public async Task<Admin?> DeleteAsync(string jmbg)
         {
             var admin = await _dbContext.Admins.FindAsync(jmbg);
             if (admin == null)
@@ -36,7 +31,5 @@ namespace Infrastructure.Repositories
         {
             return await _dbContext.Admins.FirstOrDefaultAsync(a => a.JMBG == jmbg);
         }
-
-        
     }
 }

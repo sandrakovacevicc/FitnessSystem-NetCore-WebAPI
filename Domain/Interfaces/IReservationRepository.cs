@@ -11,6 +11,6 @@ namespace Core.Interfaces
     public interface IReservationRepository : IRepository<Reservation>
     {
         Task<Reservation> GetByIdAsync(int id);
-        Task<Reservation> DeleteAsync(int id);
+        //Task<Reservation> DeleteAsync(int id);
     }
 }

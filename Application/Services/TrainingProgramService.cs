@@ -44,7 +44,7 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<TrainingProgramDto>> GetAllAsync()
         {
-            var programs =  _unitOfWork.TrainingPrograms.GetAll().ToList();
+            var programs = _unitOfWork.TrainingPrograms.GetAll().ToList();
             return _mapper.Map<List<TrainingProgramDto>>(programs);
         }
 

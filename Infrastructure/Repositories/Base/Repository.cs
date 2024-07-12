@@ -1,6 +1,7 @@
 ﻿using FitnessSystem.Core.Interfaces.Base;
 using FitnessSystem.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,6 +30,11 @@ namespace FitnessSystem.Infrastructure.Repositories.Base
             return query;
         }
 
+        public async Task<TEntity> GetByIdAsync(object id)
+        {
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+
         public async Task UpdateAsync(TEntity entityToUpdate, object key)
         {
             if (entityToUpdate == null)
@@ -52,7 +58,18 @@ namespace FitnessSystem.Infrastructure.Repositories.Base
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<TEntity> DeleteAsync(object id)
+        {
+            var entity = await _dbContext.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                return null;
+            }
 
+            _dbContext.Set<TEntity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
 
+            return entity;
+        }
     }
 }

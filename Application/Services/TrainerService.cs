@@ -44,7 +44,7 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<TrainerDto>> GetAllAsync()
         {
-            var trainers =  _unitOfWork.Trainers.GetAll().ToList();
+            var trainers = _unitOfWork.Trainers.GetAll().ToList();
             return _mapper.Map<List<TrainerDto>>(trainers);
         }
 
@@ -62,10 +62,7 @@ namespace FitnessSystem.Application.Services
                 throw new KeyNotFoundException("Trainer not found.");
             }
 
-            trainer.Name = trainerUpdateDto.Name;
-            trainer.Surname = trainerUpdateDto.Surname;
-            trainer.Email = trainerUpdateDto.Email;
-            trainer.Specialty = trainerUpdateDto.Specialty;
+            _mapper.Map(trainerUpdateDto, trainer);
             await _unitOfWork.Trainers.UpdateAsync(trainer, jmbg);
             await _unitOfWork.CompleteAsync();
 

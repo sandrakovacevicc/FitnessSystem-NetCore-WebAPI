@@ -3,10 +3,6 @@ using Core.Interfaces;
 using FitnessSystem.Data;
 using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
@@ -17,20 +13,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-
-        public async Task<TrainingProgram> DeleteAsync(int id)
-        {
-            var program = await _dbContext.TrainingPrograms.FindAsync(id);
-            if (program == null)
-            {
-                return null;
-            }
-
-            _dbContext.TrainingPrograms.Remove(program);
-            await _dbContext.SaveChangesAsync();
-
-            return program;
-        }
 
         public async Task<TrainingProgram?> GetByIdAsync(int id)
         {

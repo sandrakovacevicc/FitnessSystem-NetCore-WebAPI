@@ -43,7 +43,7 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<ClientDto>> GetAllAsync()
         {
-            var clients = _unitOfWork.Clients.GetAll().ToList();
+            var clients =  _unitOfWork.Clients.GetAll("MembershipPackage").ToList();
             return _mapper.Map<List<ClientDto>>(clients);
         }
 

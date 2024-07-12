@@ -3,10 +3,6 @@ using Core.Interfaces;
 using FitnessSystem.Data;
 using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
@@ -17,21 +13,6 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
-
-        public async Task<Reservation> DeleteAsync(int id)
-        {
-            var reservation = await _dbContext.Reservations.FindAsync(id);
-            if (reservation == null)
-            {
-                return null;
-            }
-
-            _dbContext.Reservations.Remove(reservation);
-            await _dbContext.SaveChangesAsync();
-
-            return reservation;
-        }
-
         public async Task<Reservation?> GetByIdAsync(int id)
         {
             return await _dbContext.Reservations
@@ -39,12 +20,11 @@ namespace FitnessSystem.Infrastructure.Repositories
                 .ThenInclude(c => c.MembershipPackage)
                 .Include(r => r.Session)
                     .ThenInclude(s => s.TrainingProgram)
-                 .Include(r => r.Session)
+                .Include(r => r.Session)
                     .ThenInclude(s => s.Room)
-                    .Include(r => r.Session)
+                .Include(r => r.Session)
                     .ThenInclude(s => s.Trainer)
                 .FirstOrDefaultAsync(r => r.ReservationId == id);
         }
-
     }
 }

@@ -5,7 +5,6 @@ using FitnessSystem.Application.DTOs.Room;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Services

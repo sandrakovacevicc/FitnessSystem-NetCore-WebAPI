@@ -5,6 +5,7 @@ using FitnessSystem.Application.DTOs.User;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Services
@@ -61,9 +62,7 @@ namespace FitnessSystem.Application.Services
                 throw new KeyNotFoundException("User not found.");
             }
 
-            user.Name = userUpdateDto.Name;
-            user.Surname = userUpdateDto.Surname;
-            user.Email = userUpdateDto.Email;
+            _mapper.Map(userUpdateDto, user);
             await _unitOfWork.Users.UpdateAsync(user, jmbg);
             await _unitOfWork.CompleteAsync();
 

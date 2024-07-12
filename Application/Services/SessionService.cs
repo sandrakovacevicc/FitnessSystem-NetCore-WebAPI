@@ -46,7 +46,7 @@ namespace FitnessSystem.Application.Services
         {
             var query = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram");
 
-            if (string.IsNullOrWhiteSpace(filterBy) == false && string.IsNullOrWhiteSpace(filterValue) == false)
+            if (!string.IsNullOrWhiteSpace(filterBy) && !string.IsNullOrWhiteSpace(filterValue))
             {
                 if (filterBy.Equals("TrainerJMBG", StringComparison.OrdinalIgnoreCase))
                 {
@@ -61,7 +61,6 @@ namespace FitnessSystem.Application.Services
                 }
             }
 
-
             if (!string.IsNullOrEmpty(sortBy))
             {
                 if (sortBy == "Date")
@@ -72,11 +71,11 @@ namespace FitnessSystem.Application.Services
                 {
                     query = ascending ? query.OrderBy(s => s.Time) : query.OrderByDescending(s => s.Time);
                 }
-
             }
+
             query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
-            var sessions =  query.ToList();
+            var sessions = query.ToList();
             return _mapper.Map<List<SessionDto>>(sessions);
         }
 
@@ -94,14 +93,7 @@ namespace FitnessSystem.Application.Services
                 throw new KeyNotFoundException("Session not found.");
             }
 
-            session.Duration = sessionUpdateDto.Duration;
-            session.Date = sessionUpdateDto.Date;
-            session.Time = sessionUpdateDto.Time;
-            session.Capacity = sessionUpdateDto.Capacity;
-            session.RoomId = sessionUpdateDto.RoomId;
-            session.TrainerJMBG = sessionUpdateDto.TrainerJMBG;
-            session.TrainingProgramId = sessionUpdateDto.TrainingProgramId;
-
+            _mapper.Map(sessionUpdateDto, session);
             await _unitOfWork.Sessions.UpdateAsync(session, id);
             await _unitOfWork.CompleteAsync();
 

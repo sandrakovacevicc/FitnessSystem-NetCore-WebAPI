@@ -11,6 +11,6 @@ namespace Core.Interfaces
     public interface IUserRepository : IRepository<User>
     {
         Task<User> GetByIdAsync(string JMBG);
-        Task<User> DeleteAsync(string JMBG);    
+         
     }
 }

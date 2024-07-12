@@ -3,6 +3,7 @@ using Core.Entities;
 using FitnessSystem.Application.DTOs.Admin;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -42,7 +43,7 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<AdminDto>> GetAllAsync()
         {
-            var admins =  _unitOfWork.Admins.GetAll().ToList();
+            var admins = await _unitOfWork.Admins.GetAll().ToListAsync();
             return _mapper.Map<List<AdminDto>>(admins);
         }
 
@@ -66,16 +67,7 @@ namespace FitnessSystem.Application.Services
             await _unitOfWork.Admins.UpdateAsync(admin, jmbg);
             await _unitOfWork.CompleteAsync();
 
-            var adminDto = new AdminDto
-            {
-                JMBG = admin.JMBG,
-                Name = admin.Name,
-                Surname = admin.Surname,
-                Email = admin.Email,
-
-
-            };
-            return adminDto;
+            return _mapper.Map<AdminDto>(admin);
         }
     }
 }

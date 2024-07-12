@@ -9,6 +9,8 @@ namespace FitnessSystem.Core.Interfaces.Base
         IQueryable<TEntity> GetAll(string includeProperties = "");
         Task UpdateAsync(TEntity entityToUpdate, object key);
         Task CreateAsync(TEntity entity);
+        Task<TEntity> DeleteAsync(object id);
+        Task<TEntity> GetByIdAsync(object id);
 
     }
 }

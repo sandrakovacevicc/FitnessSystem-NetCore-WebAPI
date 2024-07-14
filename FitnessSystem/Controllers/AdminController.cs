@@ -21,7 +21,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Client", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public async Task<ActionResult<List<AdminDto>>> GetAll()
         {

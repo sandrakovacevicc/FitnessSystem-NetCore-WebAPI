@@ -211,6 +211,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Ardalis.ApiEndpoints": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Azure.Identity": {
               "target": "Package",
               "version": "[1.12.0, )"

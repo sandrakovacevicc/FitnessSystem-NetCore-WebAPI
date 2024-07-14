@@ -77,7 +77,7 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<ReservationDto>> GetReservationsByClientJmbgAsync(string clientJmbg)
         {
-            var reservations = _unitOfWork.Reservations.GetAll()
+            var reservations = _unitOfWork.Reservations.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage")
                 .Where(r => r.Client.JMBG == clientJmbg)
                 .ToList();
 

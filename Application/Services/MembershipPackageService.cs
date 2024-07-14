@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.DTOs.MembershipPackage;
+using FitnessSystem.Application.DTOs.Reservation;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System.Collections.Generic;

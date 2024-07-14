@@ -52,7 +52,7 @@ namespace FitnessSystem.Presentation.Controllers
             catch (Exception ex)
             {
 
-                return StatusCode(500, "An error occurred while creating the admin.");
+                return StatusCode(500, "An error occurred while creating the user.");
             }
         }
 

@@ -14,5 +14,7 @@ namespace FitnessSystem.Application.Interfaces
         Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto);
         Task<ClientDeleteDto> DeleteClientAsync(string JMBG);
         Task<ClientDto> UpdateClientAsync(string jmbg, ClientUpdateDto clientUpdateDto);
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using FitnessSystem.Application.DTOs.Session;
+﻿using FitnessSystem.Application.DTOs.Reservation;
+using FitnessSystem.Application.DTOs.Session;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
@@ -97,6 +98,13 @@ namespace FitnessSystem.Presentation.Controllers
 
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
+        }
+
+        [HttpGet("trainers/{trainerJMBG}")]
+        public async Task<ActionResult<List<ReservationDto>>> GetSessionsByTrainerJmbg(string trainerJMBG)
+        {
+            var sessions = await _sessionService.GetSessionsByTrainerJmbgAsync(trainerJMBG);
+            return Ok(sessions);
         }
     }
 }

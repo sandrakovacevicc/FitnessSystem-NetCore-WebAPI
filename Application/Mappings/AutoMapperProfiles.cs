@@ -23,6 +23,7 @@ namespace FitnessSystem.Application.Mappings
         {
             CreateMap<Room,RoomDto>().ReverseMap();
             CreateMap<Session,SessionDto>().ReverseMap();
+            CreateMap<SessionDto, Session>().ReverseMap();
             CreateMap<MembershipPackage,MembershipPackageDto>().ReverseMap();
             CreateMap<TrainingProgram,TrainingProgramDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();

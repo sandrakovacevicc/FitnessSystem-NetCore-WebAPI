@@ -11,6 +11,7 @@ namespace Core.Interfaces
     public interface ITrainingProgramRepository : IRepository<TrainingProgram>
     {
         Task<TrainingProgram> GetByIdAsync(int id);
-       
+        Task<IEnumerable<TrainingProgram>> SearchProgramsAsync(string searchTerm);
+
     }
 }

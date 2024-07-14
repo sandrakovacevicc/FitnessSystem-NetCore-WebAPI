@@ -150,3 +150,4 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\refi
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.genruntimeconfig.cache
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\ref\FitnessSystem.Presentation.dll
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Ardalis.ApiEndpoints.dll

@@ -54,6 +54,12 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<TrainingProgramDto>(program);
         }
 
+        public async Task<IEnumerable<TrainingProgramDto>> SearchProgramsAsync(string searchTerm)
+        {
+            var programs = await _unitOfWork.TrainingPrograms.SearchProgramsAsync(searchTerm);
+            return _mapper.Map<IEnumerable<TrainingProgramDto>>(programs);
+        }
+
         public async Task<TrainingProgramDto> UpdateTrainingProgramAsync(int id, TrainingProgramDto trainingProgramDto)
         {
             var program = await _unitOfWork.TrainingPrograms.GetByIdAsync(id);

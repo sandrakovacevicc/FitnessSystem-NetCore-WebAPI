@@ -1,6 +1,8 @@
 ﻿using FitnessSystem.Application.DTOs.Trainer;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +38,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateTrainer([FromBody] TrainerAddDto trainerAddDto)
         {
             if (!ModelState.IsValid)

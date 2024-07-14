@@ -1,4 +1,5 @@
-﻿using FitnessSystem.Application.DTOs.Session;
+﻿using FitnessSystem.Application.DTOs.Reservation;
+using FitnessSystem.Application.DTOs.Session;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<SessionAddDto> CreateSessionAsync(SessionAddDto sessionAddDto);
         Task<SessionDeleteDto> DeleteSessionAsync(int id);
         Task<SessionDto> UpdateSessionAsync(int id, SessionUpdateDto sessionUpdateDto);
+        Task<List<SessionDto>> GetSessionsByTrainerJmbgAsync(string trainerJmbg);
     }
 }

@@ -2,6 +2,24 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Ardalis.ApiEndpoints/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Ardalis.ApiEndpoints.CodeAnalyzers": "4.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Ardalis.ApiEndpoints.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Ardalis.ApiEndpoints.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Ardalis.ApiEndpoints.CodeAnalyzers/4.0.0": {
+        "type": "package"
+      },
       "AutoMapper/13.0.1": {
         "type": "package",
         "dependencies": {
@@ -1693,6 +1711,34 @@
     }
   },
   "libraries": {
+    "Ardalis.ApiEndpoints/4.1.0": {
+      "sha512": "5wlBlesmzAs4J0otguglfs8wuPDi49F8jqi6DOQcnP1G5KT+aejtaIRlcCcyi5vDu3tkw1fzoZ1WVcVKM0bEFA==",
+      "type": "package",
+      "path": "ardalis.apiendpoints/4.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "ardalis.apiendpoints.4.1.0.nupkg.sha512",
+        "ardalis.apiendpoints.nuspec",
+        "lib/netcoreapp3.1/Ardalis.ApiEndpoints.dll"
+      ]
+    },
+    "Ardalis.ApiEndpoints.CodeAnalyzers/4.0.0": {
+      "sha512": "Pt6OVZvjLNAZ9amACyQ5bYFqlTwK9AbShMS3nZtN+4zYkvCSwx/jE1elrY0eOFVT2ZqwtlRpFpIWEn6a9U9hIg==",
+      "type": "package",
+      "path": "ardalis.apiendpoints.codeanalyzers/4.0.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/Ardalis.ApiEndpoints.CodeAnalyzers.dll",
+        "ardalis.apiendpoints.codeanalyzers.4.0.0.nupkg.sha512",
+        "ardalis.apiendpoints.codeanalyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "AutoMapper/13.0.1": {
       "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
       "type": "package",
@@ -4452,6 +4498,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Ardalis.ApiEndpoints >= 4.1.0",
       "Azure.Identity >= 1.12.0",
       "FitnessSystem.Application >= 1.0.0",
       "FitnessSystem.Infrastructure >= 1.0.0",
@@ -4523,6 +4570,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Ardalis.ApiEndpoints": {
+            "target": "Package",
+            "version": "[4.1.0, )"
+          },
           "Azure.Identity": {
             "target": "Package",
             "version": "[1.12.0, )"

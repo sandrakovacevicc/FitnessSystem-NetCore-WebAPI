@@ -14,5 +14,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<TrainingProgramDto> CreateTrainingProgramAsync(TrainingProgramDto trainingProgramDto);
         Task<TrainingProgramDeleteDto> DeleteTrainingProgramAsync(int id);
         Task<TrainingProgramDto> UpdateTrainingProgramAsync(int id, TrainingProgramDto trainingProgramDto);
+        Task<IEnumerable<TrainingProgramDto>> SearchProgramsAsync(string searchTerm);
     }
 }

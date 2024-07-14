@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using FitnessSystem.Application.DTOs.Reservation;
 using FitnessSystem.Application.DTOs.Session;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
@@ -85,6 +86,15 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<SessionDto>(session);
         }
 
+        public async Task<List<SessionDto>> GetSessionsByTrainerJmbgAsync(string trainerJmbg)
+        {
+            var sessions = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
+                .Where(s => s.Trainer.JMBG == trainerJmbg)
+                .ToList();
+
+            return _mapper.Map<List<SessionDto>>(sessions);
+        }
+
         public async Task<SessionDto> UpdateSessionAsync(int id, SessionUpdateDto sessionUpdateDto)
         {
             var session = await _unitOfWork.Sessions.GetByIdAsync(id);
@@ -93,7 +103,12 @@ namespace FitnessSystem.Application.Services
                 throw new KeyNotFoundException("Session not found.");
             }
 
-            _mapper.Map(sessionUpdateDto, session);
+            session.Capacity = sessionUpdateDto.Capacity;
+            session.Duration = sessionUpdateDto.Duration;
+            session.Date = sessionUpdateDto.Date;
+            session.TrainerJMBG = sessionUpdateDto.TrainerJMBG;
+            session.Time = sessionUpdateDto.Time;
+            
             await _unitOfWork.Sessions.UpdateAsync(session, id);
             await _unitOfWork.CompleteAsync();
 

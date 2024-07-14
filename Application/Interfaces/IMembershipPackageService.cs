@@ -1,4 +1,5 @@
 ﻿using FitnessSystem.Application.DTOs.MembershipPackage;
+using FitnessSystem.Application.DTOs.Reservation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

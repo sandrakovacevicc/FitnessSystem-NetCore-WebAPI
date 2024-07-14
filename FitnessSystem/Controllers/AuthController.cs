@@ -47,7 +47,7 @@ namespace Presentation.Controllers
                 {
                     foreach (var roleName in registerRequestDto.Roles)
                     { 
-                        var response = await _userManager.AddToRoleAsync(user, roleName);
+                        var response = await _userManager.AddToRoleAsync(user, "Client");
                     }
                 }
 

@@ -29,13 +29,17 @@ namespace Presentation.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
-            var user = new User
+            var user = new Client
             {
                 JMBG = registerRequestDto.JMBG,
                 Name = registerRequestDto.Name,
                 Surname = registerRequestDto.Surname,
                 Email = registerRequestDto.Email,
-                UserName = registerRequestDto.Email
+                UserName = registerRequestDto.Email,
+                Birthdate = registerRequestDto.Birthdate,
+                MobileNumber = registerRequestDto.MobileNumber,
+                MembershipPackageId = registerRequestDto.MembershipPackageId,
+
             };
 
             var result = await _userManager.CreateAsync(user, registerRequestDto.Password);

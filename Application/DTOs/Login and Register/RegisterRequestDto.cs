@@ -20,6 +20,13 @@ namespace FitnessSystem.Application.DTOs.Login
 
         [Required]
         public string JMBG { get; set; }
+        [Required]
+        public DateTime Birthdate { get; set; }
+
+        [Required]
+        public string MobileNumber { get; set; }
+        [Required]
+        public int MembershipPackageId { get; set; }
 
         public string[] Roles { get; set; }
     }

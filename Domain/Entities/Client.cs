@@ -10,9 +10,9 @@ namespace Core.Entities
     public class Client : User
     {
         public int MembershipPackageId { get; set; }
-        public MembershipPackage MembershipPackage { get; set; }
+        public MembershipPackage? MembershipPackage { get; set; }
         public DateTime Birthdate { get; set; }
-        public string MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
         [JsonIgnore]
         public List<Session> Sessions { get; set; }
 

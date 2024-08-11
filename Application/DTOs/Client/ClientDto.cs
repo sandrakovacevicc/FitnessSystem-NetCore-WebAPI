@@ -11,7 +11,7 @@ namespace FitnessSystem.Application.DTOs.Client
 {
     public class ClientDto : UserDto
     {
-
+        public int MembershipPackageId { get; set; }
         public MembershipPackageDto? MembershipPackage { get; set; }
         public DateTime Birthdate { get; set; }
         public string? MobileNumber { get; set; }

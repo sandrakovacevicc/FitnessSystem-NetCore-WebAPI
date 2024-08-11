@@ -24,6 +24,8 @@ namespace FitnessSystem.Application.Services
         public async Task<ReservationAddDto> CreateReservationAsync(ReservationAddDto reservationAddDto)
         {
             var reservation = _mapper.Map<Reservation>(reservationAddDto);
+            Session session = await _unitOfWork.Sessions.GetByIdAsync(reservation.SessionId);
+            session.Capacity--;
             await _unitOfWork.Reservations.CreateAsync(reservation);
             await _unitOfWork.CompleteAsync();
             return _mapper.Map<ReservationAddDto>(reservation);

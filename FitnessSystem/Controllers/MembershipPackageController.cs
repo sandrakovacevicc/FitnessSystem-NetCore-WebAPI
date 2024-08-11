@@ -17,7 +17,7 @@ namespace FitnessSystem.Presentation.Controllers
             _membershipPackageService = membershipPackageService;
         }
 
-        [HttpGet]
+        [HttpGet] 
         public async Task<ActionResult<List<MembershipPackageDto>>> GetAll()
         {
             var membershipPackages =  await _membershipPackageService.GetAllAsync();

@@ -10,5 +10,6 @@ namespace FitnessSystem.Application.DTOs.Trainer
     public class TrainerAddDto : UserDto
     {
         public string Specialty { get; set; }
+        public string Password {  get; set; }
     }
 }

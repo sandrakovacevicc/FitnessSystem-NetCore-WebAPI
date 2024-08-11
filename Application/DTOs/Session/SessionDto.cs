@@ -12,6 +12,7 @@ namespace FitnessSystem.Application.DTOs.Session
 {
     public class SessionDto
     {
+        public int SessionId {  get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public int Duration { get; set; }

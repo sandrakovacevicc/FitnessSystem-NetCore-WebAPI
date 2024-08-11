@@ -43,13 +43,26 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<SessionDeleteDto>(session);
         }
 
-        public async Task<List<SessionDto>> GetAllAsync(string filterBy = null, string filterValue = null, string sortBy = null, bool ascending = true, int pageNumber = 1, int pageSize = 10)
+        public async Task<List<SessionDto>> GetAllAsync(
+            string filterBy = null,
+            string filterValue = null,
+            string sortBy = "Time",  // Default sort by Time
+            bool ascending = true,
+            int pageNumber = 1,
+            int pageSize = 10)
         {
             var query = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram");
 
             if (!string.IsNullOrWhiteSpace(filterBy) && !string.IsNullOrWhiteSpace(filterValue))
             {
-                if (filterBy.Equals("TrainerJMBG", StringComparison.OrdinalIgnoreCase))
+                if (filterBy.Equals("Date", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (DateTime.TryParse(filterValue, out DateTime filterDate))
+                    {
+                        query = query.Where(s => s.Date.Date == filterDate.Date);  // Filter by date only (ignoring time)
+                    }
+                }
+                else if (filterBy.Equals("TrainerJMBG", StringComparison.OrdinalIgnoreCase))
                 {
                     query = query.Where(r => r.Trainer.JMBG.Contains(filterValue));
                 }
@@ -64,7 +77,7 @@ namespace FitnessSystem.Application.Services
 
             if (!string.IsNullOrEmpty(sortBy))
             {
-                if (sortBy == "Date")
+                if (sortBy.Equals("Date", StringComparison.OrdinalIgnoreCase))
                 {
                     query = ascending ? query.OrderBy(s => s.Date) : query.OrderByDescending(s => s.Date);
                 }

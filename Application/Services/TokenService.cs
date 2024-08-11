@@ -31,6 +31,8 @@ namespace FitnessSystem.Application.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
+            claims.Add(new Claim(ClaimTypes.UserData, user.Id));
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -38,7 +40,7 @@ namespace FitnessSystem.Application.Services
                _configuration["Jwt:Issuer"],
                _configuration["Jwt:Audience"],
                claims,
-               expires: DateTime.Now.AddMinutes(15),
+               expires: DateTime.Now.AddMinutes(65),
                signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

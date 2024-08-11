@@ -38,7 +38,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateTrainer([FromBody] TrainerAddDto trainerAddDto)
         {
             if (!ModelState.IsValid)

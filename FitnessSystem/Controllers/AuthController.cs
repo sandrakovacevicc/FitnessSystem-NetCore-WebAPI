@@ -6,6 +6,7 @@ using Core.Entities;
 using FitnessSystem.Application.DTOs;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Application.DTOs.Login;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Presentation.Controllers
 {
@@ -88,5 +89,18 @@ namespace Presentation.Controllers
             }
             return BadRequest("Something went wrong");
         }
+
+        [HttpPost]
+        [Route("decode-token")]
+        public IActionResult DecodeToken([FromBody] string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var claims = jwtToken.Claims.Select(c => new { c.Type, c.Value }).ToList();
+
+            return Ok(claims);
+        }
     }
 }
+

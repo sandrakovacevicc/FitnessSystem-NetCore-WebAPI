@@ -9,6 +9,7 @@ namespace FitnessSystem.Application.DTOs.Room
 {
     public class RoomDto
     {
+        public int RoomId { get; set; }
         public string RoomName { get; set; }
         //public Session Session { get; set; }
 

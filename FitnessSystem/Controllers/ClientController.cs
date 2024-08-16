@@ -89,5 +89,12 @@ namespace FitnessSystem.Presentation.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchClients([FromQuery] string searchTerm)
+        {
+            var clients = await _clientService.SearchClientsAsync(searchTerm);
+            return Ok(clients);
+        }
     }
 }

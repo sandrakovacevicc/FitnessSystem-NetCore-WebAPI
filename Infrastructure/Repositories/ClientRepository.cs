@@ -18,5 +18,12 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
             return await _dbContext.Clients.Include(c => c.MembershipPackage).FirstOrDefaultAsync(c => c.JMBG == jmbg);
         }
+
+        public async Task<IEnumerable<Client>> SearchClientsAsync(string searchTerm)
+        {
+            return await _dbContext.Clients.Include(c => c.MembershipPackage)
+                                    .Where(p => p.Name.Contains(searchTerm) || p.JMBG.Contains(searchTerm) || p.Surname.Contains(searchTerm))
+                                    .ToListAsync();
+        }
     }
 }

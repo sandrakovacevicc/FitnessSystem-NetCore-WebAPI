@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.DTOs.Client;
+using FitnessSystem.Application.DTOs.TrainingProgram;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System.Collections.Generic;
@@ -71,6 +72,12 @@ namespace FitnessSystem.Application.Services
             await _unitOfWork.CompleteAsync();
 
             return _mapper.Map<ClientDto>(client);
+        }
+
+        public async Task<IEnumerable<ClientDto>> SearchClientsAsync(string searchTerm)
+        {
+            var clients = await _unitOfWork.Clients.SearchClientsAsync(searchTerm);
+            return _mapper.Map<IEnumerable<ClientDto>>(clients);
         }
     }
 }

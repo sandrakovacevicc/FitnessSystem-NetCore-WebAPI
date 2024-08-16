@@ -54,7 +54,7 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<MembershipPackageDto>(membershipPackage);
         }
 
-        public async Task<MembershipPackageDeleteDto> UpdateMembershipPackageAsync(int id, MembershipPackageDto membershipPackageDto)
+        public async Task<MembershipPackageUpdateDto> UpdateMembershipPackageAsync(int id, MembershipPackageUpdateDto membershipPackageUpdateDto)
         {
             var membershipPackage = await _unitOfWork.MembershipPackages.GetByIdAsync(id);
             if (membershipPackage == null)
@@ -62,10 +62,10 @@ namespace FitnessSystem.Application.Services
                 throw new KeyNotFoundException("Membership package not found.");
             }
 
-            _mapper.Map(membershipPackageDto, membershipPackage);
+            _mapper.Map(membershipPackageUpdateDto, membershipPackage);
             await _unitOfWork.MembershipPackages.UpdateAsync(membershipPackage, id);
             await _unitOfWork.CompleteAsync();
-            return _mapper.Map<MembershipPackageDeleteDto>(membershipPackage);
+            return _mapper.Map<MembershipPackageUpdateDto>(membershipPackage);
         }
     }
 }

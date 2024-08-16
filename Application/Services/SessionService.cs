@@ -25,10 +25,23 @@ namespace FitnessSystem.Application.Services
         public async Task<SessionAddDto> CreateSessionAsync(SessionAddDto sessionAddDto)
         {
             var session = _mapper.Map<Session>(sessionAddDto);
+            var existingSession = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
+                .Where(s => s.TrainerJMBG == session.TrainerJMBG
+                    && s.Date.Date == session.Date.Date
+                    && s.Time == session.Time)
+                .FirstOrDefault();
+
+            if (existingSession != null)
+            {
+                throw new InvalidOperationException("Trainer is already busy in that time");
+            }
+
             await _unitOfWork.Sessions.CreateAsync(session);
             await _unitOfWork.CompleteAsync();
+
             return _mapper.Map<SessionAddDto>(session);
         }
+
 
         public async Task<SessionDeleteDto> DeleteSessionAsync(int id)
         {
@@ -44,22 +57,23 @@ namespace FitnessSystem.Application.Services
         }
 
         public async Task<List<SessionDto>> GetAllAsync(
-            string filterBy = null,
-            string filterValue = null,
-            string sortBy = "Time",  // Default sort by Time
-            bool ascending = true,
-            int pageNumber = 1,
-            int pageSize = 10)
+        string filterBy = null,
+        string filterValue = null,
+        string sortBy = "Time",
+        bool ascending = true,
+        int pageNumber = 1,
+        int pageSize = 10) 
         {
             var query = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram");
 
+            
             if (!string.IsNullOrWhiteSpace(filterBy) && !string.IsNullOrWhiteSpace(filterValue))
             {
                 if (filterBy.Equals("Date", StringComparison.OrdinalIgnoreCase))
                 {
                     if (DateTime.TryParse(filterValue, out DateTime filterDate))
                     {
-                        query = query.Where(s => s.Date.Date == filterDate.Date);  // Filter by date only (ignoring time)
+                        query = query.Where(s => s.Date.Date == filterDate.Date);
                     }
                 }
                 else if (filterBy.Equals("TrainerJMBG", StringComparison.OrdinalIgnoreCase))
@@ -75,6 +89,8 @@ namespace FitnessSystem.Application.Services
                 }
             }
 
+
+            
             if (!string.IsNullOrEmpty(sortBy))
             {
                 if (sortBy.Equals("Date", StringComparison.OrdinalIgnoreCase))
@@ -87,6 +103,7 @@ namespace FitnessSystem.Application.Services
                 }
             }
 
+            
             query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
             var sessions = query.ToList();
@@ -101,12 +118,30 @@ namespace FitnessSystem.Application.Services
 
         public async Task<List<SessionDto>> GetSessionsByTrainerJmbgAsync(string trainerJmbg)
         {
-            var sessions = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
+            var now = DateTime.Now; 
+
+            var allSessions = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
                 .Where(s => s.Trainer.JMBG == trainerJmbg)
+                .ToList(); 
+
+            
+            var filteredSessions = allSessions
+                .Where(s =>
+                {
+                    
+                    var sessionDateTime = s.Date.Date + s.Time;
+
+                   
+                    return sessionDateTime > now ||
+                           (sessionDateTime.Date == now.Date && sessionDateTime.TimeOfDay >= now.TimeOfDay);
+                })
+                .OrderBy(s => s.Date.Date + s.Time) 
                 .ToList();
 
-            return _mapper.Map<List<SessionDto>>(sessions);
+            return _mapper.Map<List<SessionDto>>(filteredSessions);
         }
+
+
 
         public async Task<SessionDto> UpdateSessionAsync(int id, SessionUpdateDto sessionUpdateDto)
         {

@@ -11,6 +11,7 @@ namespace FitnessSystem.Application.DTOs.Reservation
 {
     public class ReservationDto
     {
+        public int ReservationId { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public string Status { get; set; }

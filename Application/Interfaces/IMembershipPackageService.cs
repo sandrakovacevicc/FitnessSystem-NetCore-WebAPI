@@ -14,6 +14,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<MembershipPackageDto> GetByIdAsync(int id);
         Task<MembershipPackageDto> CreateMembershipPackageAsync(MembershipPackageDto membershipPackageDto);
         Task<MembershipPackageDeleteDto> DeleteMembershipPackageAsync(int id);
-        Task<MembershipPackageDeleteDto> UpdateMembershipPackageAsync(int id, MembershipPackageDto membershipPackageDto);
+        Task<MembershipPackageUpdateDto> UpdateMembershipPackageAsync(int id, MembershipPackageUpdateDto membershipPackageUpdateDto);
     }
 }

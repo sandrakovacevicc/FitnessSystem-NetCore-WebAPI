@@ -36,7 +36,7 @@ namespace Presentation.Controllers
                 Name = registerRequestDto.Name,
                 Surname = registerRequestDto.Surname,
                 Email = registerRequestDto.Email,
-                UserName = registerRequestDto.Email,
+                UserName = registerRequestDto.JMBG,
                 Birthdate = registerRequestDto.Birthdate,
                 MobileNumber = registerRequestDto.MobileNumber,
                 MembershipPackageId = registerRequestDto.MembershipPackageId,

@@ -68,7 +68,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<MembershipPackageDeleteDto>> UpdateClient(int id, [FromBody] MembershipPackageDto membershipPackageDto)
+        public async Task<ActionResult<MembershipPackageUpdateDto>> UpdateMembershipPackage(int id, [FromBody] MembershipPackageUpdateDto membershipPackageUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace FitnessSystem.Presentation.Controllers
 
             try
             {
-                var updatedMembershipPackage = await _membershipPackageService.UpdateMembershipPackageAsync(id, membershipPackageDto);
+                var updatedMembershipPackage = await _membershipPackageService.UpdateMembershipPackageAsync(id, membershipPackageUpdateDto);
                 return Ok(updatedMembershipPackage);
             }
             catch (KeyNotFoundException)

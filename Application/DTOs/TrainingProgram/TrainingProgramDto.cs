@@ -10,6 +10,7 @@ namespace FitnessSystem.Application.DTOs.TrainingProgram
 {
     public class TrainingProgramDto
     {
+        public int TrainingProgramId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int TrainingDurationInMinutes { get; set; }

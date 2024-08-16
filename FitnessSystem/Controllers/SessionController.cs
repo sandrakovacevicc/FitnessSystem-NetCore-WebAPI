@@ -57,10 +57,15 @@ namespace FitnessSystem.Presentation.Controllers
                 var createdSession = await _sessionService.CreateSessionAsync(sessionAddDto);
                 return Ok(createdSession);
             }
+            catch (InvalidOperationException ex)
+            {
+
+                return Conflict("Trainer is already busy in that time.");
+            }
             catch (Exception ex)
             {
 
-                return StatusCode(500, "An error occurred while creating the admin.");
+                return StatusCode(500, "An error occurred while creating the session.");
             }
         }
 

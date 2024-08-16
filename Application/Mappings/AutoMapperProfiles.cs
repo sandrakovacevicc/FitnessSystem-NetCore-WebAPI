@@ -34,9 +34,13 @@ namespace FitnessSystem.Application.Mappings
             CreateMap<Reservation, ReservationDto>().ReverseMap();
             CreateMap<RoomDto, Room>();
             CreateMap<MembershipPackageDto, MembershipPackage>();
+            CreateMap<MembershipPackageUpdateDto, MembershipPackage>();
+            CreateMap<MembershipPackage, MembershipPackageUpdateDto>();
             CreateMap<TrainingProgramDto, TrainingProgram>();
             CreateMap<UserDto, User>();
             CreateMap<TrainerDto, Trainer>();
+            CreateMap<TrainerUpdateDto, Trainer>();
+            CreateMap<Trainer, TrainerUpdateDto>();
             CreateMap<ClientDto, Client>();
             CreateMap<ClientAddDto, Client>();
             CreateMap<Client,ClientAddDto>();

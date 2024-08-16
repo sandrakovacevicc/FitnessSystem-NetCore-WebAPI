@@ -3,6 +3,7 @@ using Core.Interfaces;
 using FitnessSystem.Data;
 using FitnessSystem.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace FitnessSystem.Infrastructure.Repositories
@@ -13,6 +14,7 @@ namespace FitnessSystem.Infrastructure.Repositories
         {
         }
 
+       
         public async Task<Session?> GetByIdAsync(int id)
         {
             return await _dbContext.Sessions.Include(s => s.Trainer).Include(s => s.TrainingProgram).Include(s => s.Room).FirstOrDefaultAsync(s => s.SessionId == id);

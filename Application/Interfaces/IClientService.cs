@@ -1,4 +1,5 @@
 ﻿using FitnessSystem.Application.DTOs.Client;
+using FitnessSystem.Application.DTOs.TrainingProgram;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace FitnessSystem.Application.Interfaces
         Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto);
         Task<ClientDeleteDto> DeleteClientAsync(string JMBG);
         Task<ClientDto> UpdateClientAsync(string jmbg, ClientUpdateDto clientUpdateDto);
+        Task<IEnumerable<ClientDto>> SearchClientsAsync(string searchTerm);
 
 
     }

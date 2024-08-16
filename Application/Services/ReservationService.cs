@@ -38,8 +38,14 @@ namespace FitnessSystem.Application.Services
             {
                 return null;
             }
-
+            var session = await _unitOfWork.Sessions.GetByIdAsync(reservation.SessionId);
+            if (session == null)
+            {
+                return null;
+            }
+            session.Capacity++;
             await _unitOfWork.Reservations.DeleteAsync(id);
+
             await _unitOfWork.CompleteAsync();
             return _mapper.Map<ReservationDeleteDto>(reservation);
         }
@@ -81,6 +87,7 @@ namespace FitnessSystem.Application.Services
         {
             var reservations = _unitOfWork.Reservations.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage")
                 .Where(r => r.Client.JMBG == clientJmbg)
+                .Where(r => r.Date <= r.Session.Date && r.Session.Date >= DateTime.Now.Date)
                 .ToList();
 
             return _mapper.Map<List<ReservationDto>>(reservations);

@@ -6,7 +6,6 @@ namespace Core.Interfaces
 {
     public interface IAdminRepository : IRepository<Admin>
     {
-        Task<Admin?> DeleteAsync(string jmbg);
         Task<Admin?> GetByIdAsync(string jmbg);
     }
 }

@@ -81,6 +81,24 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(new { message = "Reservation deleted successfully.", reservation = reservationToDelete });
         }
 
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmReservationAsync([FromQuery] int sessionId, [FromQuery] string clientJmbg)
+        {
+            try
+            {
+                var reservationDto = await _reservationService.ConfirmReservationAsync(sessionId, clientJmbg);
+                return Ok(reservationDto);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while confirming the reservation.", error = ex.Message });
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<ReservationDto>> UpdateClient(int id, [FromBody] ReservationUpdateDto reservationUpdateDto)
         {

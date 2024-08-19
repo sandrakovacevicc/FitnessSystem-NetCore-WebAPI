@@ -51,14 +51,8 @@ namespace FitnessSystem.Application.Mappings
             CreateMap<SessionAddDto, Session>();
             CreateMap<Session, SessionAddDto>();
             CreateMap<User, UserDeleteDto>();
-            CreateMap<Trainer, TrainerDeleteDto>();
-            CreateMap<Admin, AdminDeleteDto>();
             CreateMap<Session, SessionDeleteDto>();
-            CreateMap<Client, ClientDeleteDto>();
-            CreateMap<MembershipPackage, MembershipPackageDeleteDto>();
-            CreateMap<Room, RoomDeleteDto>();
             CreateMap<Reservation, ReservationDeleteDto>();
-            CreateMap<TrainingProgram, TrainingProgramDeleteDto>();
             
          
 

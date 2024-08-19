@@ -36,41 +36,10 @@ namespace FitnessSystem.Presentation.Controllers
             }
             return Ok(trainerDto);
         }
-
-        [HttpPost]
-        //[Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateTrainer([FromBody] TrainerAddDto trainerAddDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var createdTrainer = await _trainerService.CreateTrainerAsync(trainerAddDto);
-                return Ok(createdTrainer);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "An error occurred while creating the admin.");
-            }
-        }
-
-        [HttpDelete("{jmbg}")]
-        public async Task<IActionResult> DeleteTrainer(string jmbg)
-        {
-            var trainerToDelete = await _trainerService.DeleteTrainerAsync(jmbg);
-            if (trainerToDelete == null)
-            {
-                return NotFound(new { message = "Trainer not found." });
-            }
-
-            return Ok(new { message = "Trainer deleted successfully.", room = trainerToDelete });
-        }
+      
 
         [HttpPut("{jmbg}")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<TrainerAddDto>> UpdateTrainer(string jmbg, [FromBody] TrainerUpdateDto trainerUpdateDto)
         {
             if (!ModelState.IsValid)

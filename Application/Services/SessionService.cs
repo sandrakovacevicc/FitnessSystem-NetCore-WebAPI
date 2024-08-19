@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using QRCoder;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using FitnessSystem.Application.DTOs.Reservation;
@@ -7,7 +8,9 @@ using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
+using System.Drawing;  
+using System.IO;
 
 namespace FitnessSystem.Application.Services
 {
@@ -162,5 +165,29 @@ namespace FitnessSystem.Application.Services
 
             return _mapper.Map<SessionDto>(session);
         }
+
+        public async Task<byte[]> GenerateQrCodeAsync(int sessionId)
+        {
+            var session = await _unitOfWork.Sessions.GetByIdAsync(sessionId);
+            if (session == null)
+            {
+                throw new KeyNotFoundException("Session not found.");
+            }
+
+            var qrData = $"{session.SessionId}";
+
+
+            using (var qrGenerator = new QRCodeGenerator())
+            {
+                var qrCodeData = qrGenerator.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q);
+
+          
+                using (var qrCode = new PngByteQRCode(qrCodeData))
+                {
+                    return qrCode.GetGraphic(20);  
+                }
+            }
+        }
+
     }
 }

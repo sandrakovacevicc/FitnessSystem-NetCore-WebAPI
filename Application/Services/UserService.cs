@@ -21,27 +21,6 @@ namespace FitnessSystem.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UserDto> CreateUserAsync(UserDto userDto)
-        {
-            var user = _mapper.Map<User>(userDto);
-            await _unitOfWork.Users.CreateAsync(user);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<UserDto>(user);
-        }
-
-        public async Task<UserDeleteDto> DeleteUserAsync(string JMBG)
-        {
-            var user = await _unitOfWork.Users.GetByIdAsync(JMBG);
-            if (user == null)
-            {
-                return null;
-            }
-
-            await _unitOfWork.Users.DeleteAsync(JMBG);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<UserDeleteDto>(user);
-        }
-
         public async Task<List<UserDto>> GetAllAsync()
         {
             var users = _unitOfWork.Users.GetAll().ToList();
@@ -54,19 +33,6 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<UserDto> UpdateUserAsync(string jmbg, UserUpdateDto userUpdateDto)
-        {
-            var user = await _unitOfWork.Users.GetByIdAsync(jmbg);
-            if (user == null)
-            {
-                throw new KeyNotFoundException("User not found.");
-            }
-
-            _mapper.Map(userUpdateDto, user);
-            await _unitOfWork.Users.UpdateAsync(user, jmbg);
-            await _unitOfWork.CompleteAsync();
-
-            return _mapper.Map<UserDto>(user);
-        }
+       
     }
 }

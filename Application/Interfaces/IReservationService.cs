@@ -15,5 +15,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<ReservationDeleteDto> DeleteReservationAsync(int id);
         Task<ReservationDto> UpdateReservationAsync(int id, ReservationUpdateDto reservationUpdateDto);
         Task<List<ReservationDto>> GetReservationsByClientJmbgAsync(string clientJmbg);
+        Task<ReservationDto> ConfirmReservationAsync(int sessionId, string clientJmbg);
     }
 }

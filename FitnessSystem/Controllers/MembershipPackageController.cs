@@ -35,37 +35,6 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(membershipPackageDto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateMembershipPackage([FromBody] MembershipPackageDto membershipPackageDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var createdMembershipPackage = await _membershipPackageService.CreateMembershipPackageAsync(membershipPackageDto);
-                return Ok(createdMembershipPackage);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "An error occurred while creating the admin.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMembershipPackage(int id)
-        {
-            var membershipPackageToDelete = await _membershipPackageService.DeleteMembershipPackageAsync(id);
-            if (membershipPackageToDelete == null)
-            {
-                return NotFound(new { message = "MembershipPackage not found." });
-            }
-
-            return Ok(new { message = "MembershipPackage deleted successfully.", membershipPackage = membershipPackageToDelete });
-        }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<MembershipPackageUpdateDto>> UpdateMembershipPackage(int id, [FromBody] MembershipPackageUpdateDto membershipPackageUpdateDto)

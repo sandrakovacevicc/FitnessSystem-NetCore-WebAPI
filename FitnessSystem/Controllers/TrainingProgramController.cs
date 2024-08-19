@@ -37,67 +37,12 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(programDto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateProgram([FromBody] TrainingProgramDto trainingProgramDto)
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchPrograms([FromQuery] string searchTerm)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var createdProgram = await _trainingProgramService.CreateTrainingProgramAsync(trainingProgramDto);
-                return Ok(createdProgram);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "An error occurred while creating the admin.");
-            }
+               var programs = await _trainingProgramService.SearchProgramsAsync(searchTerm);
+               return Ok(programs);
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainingProgram(int id)
-        {
-            var trainingProgramToDelete = await _trainingProgramService.DeleteTrainingProgramAsync(id);
-            if (trainingProgramToDelete == null)
-            {
-                return NotFound(new { message = "TrainingProgram not found." });
-            }
-
-            return Ok(new { message = "TrainingProgram deleted successfully.", room = trainingProgramToDelete });
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<TrainingProgramDeleteDto>> UpdateClient(int id, [FromBody] TrainingProgramDto trainingProgramDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var updatedRoom = await _trainingProgramService.UpdateTrainingProgramAsync(id, trainingProgramDto);
-                return Ok(updatedRoom);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
-        }
-
-            [HttpGet("search")]
-            public async Task<IActionResult> SearchPrograms([FromQuery] string searchTerm)
-            {
-                var programs = await _trainingProgramService.SearchProgramsAsync(searchTerm);
-                return Ok(programs);
-            }
     }
 }

@@ -21,27 +21,6 @@ namespace FitnessSystem.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ClientAddDto> CreateClientAsync(ClientAddDto clientAddDto)
-        {
-            var client = _mapper.Map<Client>(clientAddDto);
-            await _unitOfWork.Clients.CreateAsync(client);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<ClientAddDto>(client);
-        }
-
-        public async Task<ClientDeleteDto> DeleteClientAsync(string jmbg)
-        {
-            var client = await _unitOfWork.Clients.GetByIdAsync(jmbg);
-            if (client == null)
-            {
-                return null;
-            }
-
-            await _unitOfWork.Clients.DeleteAsync(jmbg);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<ClientDeleteDto>(client);
-        }
-
         public async Task<List<ClientDto>> GetAllAsync()
         {
             var clients =  _unitOfWork.Clients.GetAll("MembershipPackage").ToList();

@@ -13,20 +13,6 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<Admin?> DeleteAsync(string jmbg)
-        {
-            var admin = await _dbContext.Admins.FindAsync(jmbg);
-            if (admin == null)
-            {
-                return null;
-            }
-
-            _dbContext.Admins.Remove(admin);
-            await _dbContext.SaveChangesAsync();
-
-            return admin;
-        }
-
         public async Task<Admin?> GetByIdAsync(string jmbg)
         {
             return await _dbContext.Admins.FirstOrDefaultAsync(a => a.JMBG == jmbg);

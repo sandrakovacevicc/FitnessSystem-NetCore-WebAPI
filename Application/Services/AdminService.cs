@@ -20,26 +20,6 @@ namespace FitnessSystem.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<AdminDto> CreateAdminAsync(AdminDto adminDto)
-        {
-            var admin = _mapper.Map<Admin>(adminDto);
-            await _unitOfWork.Admins.CreateAsync(admin);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<AdminDto>(admin);
-        }
-
-        public async Task<AdminDeleteDto> DeleteAdminAsync(string jmbg)
-        {
-            var admin = await _unitOfWork.Admins.GetByIdAsync(jmbg);
-            if (admin == null)
-            {
-                return null;
-            }
-
-            await _unitOfWork.Admins.DeleteAsync(jmbg);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<AdminDeleteDto>(admin);
-        }
 
         public async Task<List<AdminDto>> GetAllAsync()
         {
@@ -53,21 +33,6 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<AdminDto>(admin);
         }
 
-        public async Task<AdminDto> UpdateAdminAsync(string jmbg, AdminUpdateDto adminUpdateDto)
-        {
-            var admin = await _unitOfWork.Admins.GetByIdAsync(jmbg);
-            if (admin == null)
-            {
-                throw new KeyNotFoundException("Admin not found.");
-            }
-
-            admin.Name = adminUpdateDto.Name;
-            admin.Surname = adminUpdateDto.Surname;
-            admin.Email = adminUpdateDto.Email;
-            await _unitOfWork.Admins.UpdateAsync(admin, jmbg);
-            await _unitOfWork.CompleteAsync();
-
-            return _mapper.Map<AdminDto>(admin);
-        }
+       
     }
 }

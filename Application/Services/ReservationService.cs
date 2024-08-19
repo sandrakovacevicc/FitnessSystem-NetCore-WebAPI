@@ -117,5 +117,25 @@ namespace FitnessSystem.Application.Services
 
             return _mapper.Map<ReservationDto>(reservation);
         }
+
+        public async Task<ReservationDto> ConfirmReservationAsync(int sessionId, string clientJmbg)
+        {
+            var reservation = _unitOfWork.Reservations.GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client,Client.MembershipPackage")
+                .FirstOrDefault(r => r.SessionId == sessionId && r.Client.JMBG == clientJmbg);
+
+            if (reservation == null)
+            {
+                throw new KeyNotFoundException("Reservation not found.");
+            }
+
+            reservation.Status = "confirmed";
+
+            await _unitOfWork.Reservations.UpdateAsync(reservation, reservation.ReservationId);
+            await _unitOfWork.CompleteAsync();
+
+            return _mapper.Map<ReservationDto>(reservation);
+        }
+
+
     }
 }

@@ -35,37 +35,6 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(clientDto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateClient([FromBody] ClientAddDto clientAddDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var createdClient = await _clientService.CreateClientAsync(clientAddDto); 
-                return Ok(createdClient);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An error occurred while creating the client.");
-            }
-        }
-
-        [HttpDelete("{jmbg}")]
-        public async Task<IActionResult> DeleteClient(string jmbg)
-        {
-            var clientToDelete = await _clientService.DeleteClientAsync(jmbg);
-            if (clientToDelete == null)
-            {
-                return NotFound(new { message = "User not found." });
-            }
-
-            return Ok(new { message = "User deleted successfully.", client = clientToDelete });
-        }
-
         [HttpPut("{jmbg}")]
         public async Task<ActionResult<ClientDto>> UpdateClient(string jmbg, [FromBody] ClientUpdateDto clientUpdateDto)
         {

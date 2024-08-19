@@ -38,63 +38,7 @@ namespace FitnessSystem.Presentation.Controllers
                 return NotFound();
             }
             return Ok(adminDto);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateAdmin([FromBody] AdminDto adminDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var createdAdmin = await _adminService.CreateAdminAsync(adminDto);
-                return Ok(createdAdmin);
-            }
-            catch (Exception ex)
-            {
-                
-                return StatusCode(500, "An error occurred while creating the admin.");
-            }
-        }
-
-        [HttpDelete("{jmbg}")]
-        public async Task<IActionResult> DeleteAdmin(string jmbg)
-        {
-            var adminToDelete = await _adminService.DeleteAdminAsync(jmbg);
-            if (adminToDelete == null)
-            {
-                return NotFound(new { message = "User not found." });
-            }
-
-            return Ok(new { message = "User deleted successfully.", admin = adminToDelete });
-        }
-
-        [HttpPut("{jmbg}")]
-        public async Task<ActionResult<AdminDto>> UpdateUser(string jmbg, [FromBody] AdminUpdateDto adminUpdateDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var updatedAdmin = await _adminService.UpdateAdminAsync(jmbg, adminUpdateDto);
-                return Ok(updatedAdmin);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
-        }
+        } 
 
     }
 }

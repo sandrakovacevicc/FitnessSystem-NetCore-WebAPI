@@ -17,5 +17,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<SessionDeleteDto> DeleteSessionAsync(int id);
         Task<SessionDto> UpdateSessionAsync(int id, SessionUpdateDto sessionUpdateDto);
         Task<List<SessionDto>> GetSessionsByTrainerJmbgAsync(string trainerJmbg);
+        Task<byte[]> GenerateQrCodeAsync(int sessionId);
     }
 }

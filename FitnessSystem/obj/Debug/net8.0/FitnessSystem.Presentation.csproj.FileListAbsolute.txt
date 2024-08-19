@@ -1,3 +1,10 @@
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.csproj.AssemblyReference.cache
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.AssemblyInfoInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.AssemblyInfo.cs
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.csproj.CoreCompileInputs.cache
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.sourcelink.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\appsettings.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.exe
@@ -5,6 +12,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Fitn
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.runtimeconfig.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Presentation.pdb
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Ardalis.ApiEndpoints.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Azure.Identity.dll
@@ -40,6 +48,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Micr
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\QRCoder.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -116,9 +125,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runt
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
@@ -128,14 +135,7 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Fitn
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Application.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Infrastructure.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\FitnessSystem.Core.pdb
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.csproj.AssemblyReference.cache
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.AssemblyInfoInputs.cache
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.AssemblyInfo.cs
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.csproj.CoreCompileInputs.cache
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.sourcelink.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\staticwebassets\msbuild.FitnessSystem.Presentation.Microsoft.AspNetCore.StaticWebAssets.props
@@ -150,4 +150,3 @@ C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\refi
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.pdb
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\FitnessSystem.Presentation.genruntimeconfig.cache
 C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\obj\Debug\net8.0\ref\FitnessSystem.Presentation.dll
-C:\Users\korisnik\source\repos\FitnessSystem\FitnessSystem\bin\Debug\net8.0\Ardalis.ApiEndpoints.dll

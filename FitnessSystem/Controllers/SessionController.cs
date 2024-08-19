@@ -20,18 +20,16 @@ namespace FitnessSystem.Presentation.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<SessionDto>>> GetAll(
-        [FromQuery] string filterBy,
-        [FromQuery] string filterValue,
-        [FromQuery] string sortBy,
-        [FromQuery] bool ascending,
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
+            [FromQuery] string filterBy,
+            [FromQuery] string filterValue,
+            [FromQuery] string sortBy,
+            [FromQuery] bool ascending,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
         {
             var sessions = await _sessionService.GetAllAsync(filterBy, filterValue, sortBy, ascending, pageNumber, pageSize);
             return Ok(sessions);
         }
-
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -57,14 +55,12 @@ namespace FitnessSystem.Presentation.Controllers
                 var createdSession = await _sessionService.CreateSessionAsync(sessionAddDto);
                 return Ok(createdSession);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-
                 return Conflict("Trainer is already busy in that time.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 return StatusCode(500, "An error occurred while creating the session.");
             }
         }
@@ -82,7 +78,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<SessionDto>> UpdateClient(int id, [FromBody] SessionUpdateDto sessionUpdateDto)
+        public async Task<ActionResult<SessionDto>> UpdateSession(int id, [FromBody] SessionUpdateDto sessionUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -100,7 +96,6 @@ namespace FitnessSystem.Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
@@ -110,6 +105,30 @@ namespace FitnessSystem.Presentation.Controllers
         {
             var sessions = await _sessionService.GetSessionsByTrainerJmbgAsync(trainerJMBG);
             return Ok(sessions);
+        }
+
+        [HttpGet("{id}/qrcode")]
+        public async Task<IActionResult> GenerateQrCode(int id)
+        {
+            try
+            {
+                var qrCodeImage = await _sessionService.GenerateQrCodeAsync(id);
+
+                if (qrCodeImage == null)
+                {
+                    return NotFound("Session not found.");
+                }
+
+                return File(qrCodeImage, "image/png");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Session not found.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
         }
     }
 }

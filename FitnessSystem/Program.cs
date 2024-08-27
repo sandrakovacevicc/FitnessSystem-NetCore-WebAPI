@@ -7,8 +7,10 @@ using FitnessSystem.Core.Interfaces;
 using FitnessSystem.Data;
 using FitnessSystem.Infrastructure.Data;
 using FitnessSystem.Infrastructure.Repositories;
+using FitnessSystem.Presentation.Middlewares;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,8 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Logging.AddConsole(); 
+builder.Logging.AddDebug();
 
 // CORS 
 builder.Services.AddCors(options =>
@@ -89,7 +93,7 @@ builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthentificationService, AuthentificationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Identity Configuration
@@ -99,7 +103,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
+    options.Password.RequiredLength = 3;
     options.Password.RequiredUniqueChars = 1;
 })
 .AddEntityFrameworkStores<AppDbContext>()
@@ -131,9 +135,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseMiddleware<ExceptionHandlerMiddlewares>();
 app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
+
 
 app.UseAuthentication();
 app.UseAuthorization();

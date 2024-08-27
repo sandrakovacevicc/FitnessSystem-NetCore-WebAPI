@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Interfaces
 {
-        public interface ITokenService
+        public interface IAuthentificationService
         {
             string CreateJWTToken(IdentityUser user, List<string> roles);
         }

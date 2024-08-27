@@ -1,8 +1,9 @@
 ﻿using FitnessSystem.Application.DTOs.MembershipPackage;
 using FitnessSystem.Application.Interfaces;
-using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitnessSystem.Presentation.Controllers
 {
@@ -17,10 +18,10 @@ namespace FitnessSystem.Presentation.Controllers
             _membershipPackageService = membershipPackageService;
         }
 
-        [HttpGet] 
+        [HttpGet]
         public async Task<ActionResult<List<MembershipPackageDto>>> GetAll()
         {
-            var membershipPackages =  await _membershipPackageService.GetAllAsync();
+            var membershipPackages = await _membershipPackageService.GetAllAsync();
             return Ok(membershipPackages);
         }
 
@@ -35,7 +36,6 @@ namespace FitnessSystem.Presentation.Controllers
             return Ok(membershipPackageDto);
         }
 
-
         [HttpPut("{id}")]
         public async Task<ActionResult<MembershipPackageUpdateDto>> UpdateMembershipPackage(int id, [FromBody] MembershipPackageUpdateDto membershipPackageUpdateDto)
         {
@@ -44,20 +44,8 @@ namespace FitnessSystem.Presentation.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                var updatedMembershipPackage = await _membershipPackageService.UpdateMembershipPackageAsync(id, membershipPackageUpdateDto);
-                return Ok(updatedMembershipPackage);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+            var updatedMembershipPackage = await _membershipPackageService.UpdateMembershipPackageAsync(id, membershipPackageUpdateDto);
+            return Ok(updatedMembershipPackage);
         }
     }
 }

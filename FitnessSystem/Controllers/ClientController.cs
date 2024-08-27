@@ -1,8 +1,8 @@
 ﻿using FitnessSystem.Application.DTOs.Client;
 using FitnessSystem.Application.Interfaces;
-using FitnessSystem.Application.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitnessSystem.Presentation.Controllers
 {
@@ -43,20 +43,8 @@ namespace FitnessSystem.Presentation.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                var updatedClient = await _clientService.UpdateClientAsync(jmbg, clientUpdateDto);
-                return Ok(updatedClient);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+            var updatedClient = await _clientService.UpdateClientAsync(jmbg, clientUpdateDto);
+            return Ok(updatedClient);
         }
 
         [HttpGet("search")]

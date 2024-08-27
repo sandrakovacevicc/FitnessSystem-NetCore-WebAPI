@@ -28,15 +28,26 @@ namespace FitnessSystem.Application.Services
         public async Task<SessionAddDto> CreateSessionAsync(SessionAddDto sessionAddDto)
         {
             var session = _mapper.Map<Session>(sessionAddDto);
-            var existingSession = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
-                .Where(s => s.TrainerJMBG == session.TrainerJMBG
-                    && s.Date.Date == session.Date.Date
-                    && s.Time == session.Time)
-                .FirstOrDefault();
 
-            if (existingSession != null)
+            var newSessionDuration = TimeSpan.FromMinutes(session.Duration);
+            var newSessionStartTime = session.Time;
+            var newSessionEndTime = newSessionStartTime + newSessionDuration;
+
+            var existingSessions = _unitOfWork.Sessions.GetAll("Trainer,Room,TrainingProgram")
+                .Where(s => s.TrainerJMBG == session.TrainerJMBG
+                            && s.Date.Date == session.Date.Date)
+                .ToList();
+
+            foreach (var existingSession in existingSessions)
             {
-                throw new InvalidOperationException("Trainer is already busy in that time");
+                var existingSessionDuration = TimeSpan.FromMinutes(existingSession.Duration);
+                var existingSessionStartTime = existingSession.Time;
+                var existingSessionEndTime = existingSessionStartTime + existingSessionDuration;
+
+                if (newSessionStartTime <= existingSessionEndTime && newSessionEndTime >= existingSessionStartTime)
+                {
+                    throw new InvalidOperationException("Trainer is already busy in that time");
+                }
             }
 
             await _unitOfWork.Sessions.CreateAsync(session);
@@ -44,6 +55,9 @@ namespace FitnessSystem.Application.Services
 
             return _mapper.Map<SessionAddDto>(session);
         }
+
+
+
 
 
         public async Task<SessionDeleteDto> DeleteSessionAsync(int id)

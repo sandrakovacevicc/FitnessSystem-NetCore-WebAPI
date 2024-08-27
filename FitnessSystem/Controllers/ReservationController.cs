@@ -1,8 +1,9 @@
 ﻿using FitnessSystem.Application.DTOs.Reservation;
 using FitnessSystem.Application.Interfaces;
-using FitnessSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitnessSystem.Presentation.Controllers
 {
@@ -19,12 +20,12 @@ namespace FitnessSystem.Presentation.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<ReservationDto>>> GetAll(
-        [FromQuery] string filterBy,
-        [FromQuery] string filterValue,
-        [FromQuery] string sortBy,
-        [FromQuery] bool ascending,
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
+            [FromQuery] string filterBy,
+            [FromQuery] string filterValue,
+            [FromQuery] string sortBy,
+            [FromQuery] bool ascending,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
         {
             var reservations = await _reservationService.GetAllAsync(filterBy, filterValue, sortBy, ascending, pageNumber, pageSize);
             return Ok(reservations);
@@ -36,7 +37,6 @@ namespace FitnessSystem.Presentation.Controllers
             var reservations = await _reservationService.GetReservationsByClientJmbgAsync(clientJmbg);
             return Ok(reservations);
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -57,16 +57,8 @@ namespace FitnessSystem.Presentation.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                var createdReservation = await _reservationService.CreateReservationAsync(reservationAddDto);
-                return Ok(createdReservation);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500, "An error occurred while creating the admin.");
-            }
+            var createdReservation = await _reservationService.CreateReservationAsync(reservationAddDto);
+            return Ok(createdReservation);
         }
 
         [HttpDelete("{id}")]
@@ -84,19 +76,13 @@ namespace FitnessSystem.Presentation.Controllers
         [HttpPost("confirm")]
         public async Task<IActionResult> ConfirmReservationAsync([FromQuery] int sessionId, [FromQuery] string clientJmbg)
         {
-            try
+            var reservationDto = await _reservationService.ConfirmReservationAsync(sessionId, clientJmbg);
+            if (reservationDto == null)
             {
-                var reservationDto = await _reservationService.ConfirmReservationAsync(sessionId, clientJmbg);
-                return Ok(reservationDto);
+                return NotFound(new { message = "Reservation not found." });
             }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "An error occurred while confirming the reservation.", error = ex.Message });
-            }
+
+            return Ok(reservationDto);
         }
 
         [HttpPut("{id}")]
@@ -107,20 +93,13 @@ namespace FitnessSystem.Presentation.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
+            var updatedReservation = await _reservationService.UpdateReservationAsync(id, reservationUpdateDto);
+            if (updatedReservation == null)
             {
-                var updatedReservation = await _reservationService.UpdateReservationAsync(id, reservationUpdateDto);
-                return Ok(updatedReservation);
+                return NotFound(new { message = "Reservation not found." });
             }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
 
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+            return Ok(updatedReservation);
         }
     }
 }

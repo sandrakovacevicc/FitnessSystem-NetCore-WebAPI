@@ -23,13 +23,43 @@ namespace FitnessSystem.Application.Services
 
         public async Task<ReservationAddDto> CreateReservationAsync(ReservationAddDto reservationAddDto)
         {
-            var reservation = _mapper.Map<Reservation>(reservationAddDto);
-            Session session = await _unitOfWork.Sessions.GetByIdAsync(reservation.SessionId);
-            session.Capacity--;
-            await _unitOfWork.Reservations.CreateAsync(reservation);
-            await _unitOfWork.CompleteAsync();
-            return _mapper.Map<ReservationAddDto>(reservation);
+            try
+            {
+                var reservation = _mapper.Map<Reservation>(reservationAddDto);
+
+                Session session = await _unitOfWork.Sessions.GetByIdAsync(reservation.SessionId);
+                if (session == null)
+                {
+                    throw new KeyNotFoundException("Session not found.");
+                }
+
+                if (session.Capacity <= 0)
+                {
+                    throw new InvalidOperationException("No capacity available for the session.");
+                }
+
+                session.Capacity--;
+
+                await _unitOfWork.Reservations.CreateAsync(reservation);
+
+                await _unitOfWork.CompleteAsync();
+
+                return _mapper.Map<ReservationAddDto>(reservation);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                throw new ArgumentException("Invalid session ID provided.", ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("Cannot create reservation: " + ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An unexpected error occurred while creating the reservation.", ex);
+            }
         }
+
 
         public async Task<ReservationDeleteDto> DeleteReservationAsync(int id)
         {

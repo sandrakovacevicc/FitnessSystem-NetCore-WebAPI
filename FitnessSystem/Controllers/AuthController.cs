@@ -16,16 +16,15 @@ namespace Presentation.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ITokenService _tokenService;
+        private readonly IAuthentificationService _tokenService;
 
-        public AuthController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ITokenService tokenService)
+        public AuthController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IAuthentificationService tokenService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _tokenService = tokenService;
         }
 
-        // POST: /api/auth/register
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)

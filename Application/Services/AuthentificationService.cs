@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace FitnessSystem.Application.Services
 {
-    public class TokenService : ITokenService
+    public class AuthentificationService : IAuthentificationService
     {
         private readonly IConfiguration _configuration;
-        public TokenService(IConfiguration configuration)
+        public AuthentificationService(IConfiguration configuration)
         {
             _configuration = configuration;
         }

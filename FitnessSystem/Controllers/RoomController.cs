@@ -18,14 +18,14 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<RoomDto>>> GetAll()
+        public async Task<ActionResult<List<RoomDto>>> GetAllRooms()
         {
             var rooms = await _roomService.GetAllAsync();
             return Ok(rooms);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetRoomById(int id)
         {
             var roomDto = await _roomService.GetByIdAsync(id);
             if (roomDto == null)

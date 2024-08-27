@@ -19,7 +19,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<SessionDto>>> GetAll(
+        public async Task<ActionResult<List<SessionDto>>> GetAllSessions(
             [FromQuery] string filterBy,
             [FromQuery] string filterValue,
             [FromQuery] string sortBy,
@@ -32,7 +32,7 @@ namespace FitnessSystem.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetSessionById(int id)
         {
             var sessionDto = await _sessionService.GetByIdAsync(id);
             if (sessionDto == null)
@@ -85,19 +85,13 @@ namespace FitnessSystem.Presentation.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
+            var updatedSession = await _sessionService.UpdateSessionAsync(id, sessionUpdateDto);
+            if (updatedSession == null)
             {
-                var updatedSession = await _sessionService.UpdateSessionAsync(id, sessionUpdateDto);
-                return Ok(updatedSession);
+                return NotFound(new { message = "Session not found." });
             }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+
+            return Ok(updatedSession);
         }
 
         [HttpGet("trainers/{trainerJMBG}")]

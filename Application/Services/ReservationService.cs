@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using FitnessSystem.Application.DTOs.Client;
 using FitnessSystem.Application.DTOs.Reservation;
 using FitnessSystem.Application.Interfaces;
 using FitnessSystem.Core.Interfaces;
@@ -166,6 +167,18 @@ namespace FitnessSystem.Application.Services
             return _mapper.Map<ReservationDto>(reservation);
         }
 
+        public async Task<List<ClientDto>> GetConfirmedClientsBySessionIdAsync(int sessionId)
+        {
+            var confirmedReservations = _unitOfWork.Reservations
+                .GetAll("Session,Session.Trainer,Session.Room,Session.TrainingProgram,Client")
+                .Where(r => r.SessionId == sessionId && r.Status == "confirmed")
+                .ToList();
 
+            var clients = confirmedReservations.Select(r => r.Client).Distinct().ToList();
+
+            return _mapper.Map<List<ClientDto>>(clients);
+        }
+
+       
     }
 }

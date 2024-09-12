@@ -14,7 +14,7 @@ namespace FitnessSystem.Presentation.Controllers
         private readonly IAdminService _adminService;
         private readonly ILogger<AdminController> _logger; 
 
-        public AdminController(IAdminService adminService, ILogger<AdminController> logger) // Dodajte logger u konstruktor
+        public AdminController(IAdminService adminService, ILogger<AdminController> logger) 
         {
             _adminService = adminService;
             _logger = logger;

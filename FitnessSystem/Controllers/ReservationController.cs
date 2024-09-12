@@ -1,4 +1,5 @@
-﻿using FitnessSystem.Application.DTOs.Reservation;
+﻿using FitnessSystem.Application.DTOs.Client;
+using FitnessSystem.Application.DTOs.Reservation;
 using FitnessSystem.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -101,5 +102,20 @@ namespace FitnessSystem.Presentation.Controllers
 
             return Ok(updatedReservation);
         }
+
+        [HttpGet("sessions/{sessionId}/confirmed-clients")]
+        public async Task<ActionResult<List<ClientDto>>> GetConfirmedClientsBySessionId(int sessionId)
+        {
+            var confirmedClients = await _reservationService.GetConfirmedClientsBySessionIdAsync(sessionId);
+
+            if (confirmedClients == null || confirmedClients.Count == 0)
+            {
+                return NotFound(new { message = "No confirmed clients found for the specified session." });
+            }
+
+            return Ok(confirmedClients);
+        }
+
+
     }
 }

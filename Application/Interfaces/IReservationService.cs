@@ -1,4 +1,5 @@
-﻿using FitnessSystem.Application.DTOs.Reservation;
+﻿using FitnessSystem.Application.DTOs.Client;
+using FitnessSystem.Application.DTOs.Reservation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace FitnessSystem.Application.Interfaces
         Task<ReservationDto> UpdateReservationAsync(int id, ReservationUpdateDto reservationUpdateDto);
         Task<List<ReservationDto>> GetReservationsByClientJmbgAsync(string clientJmbg);
         Task<ReservationDto> ConfirmReservationAsync(int sessionId, string clientJmbg);
+        Task<List<ClientDto>> GetConfirmedClientsBySessionIdAsync(int sessionId);
     }
 }

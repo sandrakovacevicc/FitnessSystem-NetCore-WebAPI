@@ -15,6 +15,7 @@ namespace FitnessSystem.Application.DTOs.Client
         public MembershipPackageDto? MembershipPackage { get; set; }
         public DateTime Birthdate { get; set; }
         public string? MobileNumber { get; set; }
+        public bool? IsPaid { get; set; }
 
     }
 

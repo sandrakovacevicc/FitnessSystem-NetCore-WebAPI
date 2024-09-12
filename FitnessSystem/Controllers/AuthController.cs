@@ -39,6 +39,7 @@ namespace Presentation.Controllers
                 Birthdate = registerRequestDto.Birthdate,
                 MobileNumber = registerRequestDto.MobileNumber,
                 MembershipPackageId = registerRequestDto.MembershipPackageId,
+                IsPaid = registerRequestDto.IsPaid,
 
             };
 

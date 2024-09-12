@@ -27,6 +27,7 @@ namespace FitnessSystem.Application.DTOs.Login
         public string MobileNumber { get; set; }
         [Required]
         public int MembershipPackageId { get; set; }
+        public bool IsPaid = false;
 
         public string[] Roles { get; set; }
     }

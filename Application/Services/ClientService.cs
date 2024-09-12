@@ -46,6 +46,7 @@ namespace FitnessSystem.Application.Services
             client.Email = clientUpdateDto.Email;
             client.Birthdate = clientUpdateDto.Birthdate;
             client.MembershipPackageId = clientUpdateDto.MembershipPackageId;
+            client.IsPaid = clientUpdateDto.IsPaid;
             client.MobileNumber = clientUpdateDto.MobileNumber;
             await _unitOfWork.Clients.UpdateAsync(client, jmbg);
             await _unitOfWork.CompleteAsync();

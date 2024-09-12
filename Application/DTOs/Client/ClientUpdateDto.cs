@@ -17,5 +17,7 @@ namespace FitnessSystem.Application.DTOs.Client
         [Required]
         [Phone]
         public string MobileNumber { get; set; }
+        [Required]
+        public bool? IsPaid { get; set; }
     }
 }

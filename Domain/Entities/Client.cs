@@ -13,6 +13,7 @@ namespace Core.Entities
         public MembershipPackage? MembershipPackage { get; set; }
         public DateTime Birthdate { get; set; }
         public string? MobileNumber { get; set; }
+        public bool? IsPaid { get; set; }
         [JsonIgnore]
         public List<Session> Sessions { get; set; }
 
